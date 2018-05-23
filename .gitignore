@@ -1,0 +1,9 @@
+
+/.idea/
+/SDL_UI.iml
+*.log
+/target/
+/allure-results/
+/.allure/
+/test-output/
+/testUtils-output/

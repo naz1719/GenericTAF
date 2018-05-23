@@ -1,0 +1,29 @@
+package com.sample.project.bo;
+
+import com.sample.project.po.SamplePO;
+
+public class SampleBO extends BaseBO {
+    private SamplePO samplePO;
+
+    public SampleBO() {
+        samplePO = new SamplePO();
+    }
+
+    public SampleBO clickOnBuildingBlocks(){
+        step("Click on 'Publication 200 Building Blocks'");
+        samplePO.act_clickBuildingBlocks();
+        return this;
+    }
+
+    public SampleBO clickOnAvocadoToolsTab(){
+        step("Click on 'AvocadoToolsTab'");
+        samplePO.act_clickAvocadoToolsTab();
+        return this;
+    }
+
+
+    public void openPortal(String url){
+        super.openPortal(url);
+    }
+
+}
