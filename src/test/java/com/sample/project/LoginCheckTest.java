@@ -5,7 +5,7 @@ import com.sample.core.core.injector.Injector;
 import com.sample.core.testUtils.BaseTestClass;
 import org.testng.annotations.Test;
 
-import static com.sample.project.constants.CommonConsts.WEB_SITE_URL;
+import static com.sample.constants.CommonConsts.WEB_SITE_URL;
 
 public class LoginCheckTest extends BaseTestClass {
 

@@ -1,6 +1,6 @@
 package com.sample.core.testUtils;
 
-import com.sample.project.constants.CommonConsts;
+import com.sample.constants.CommonConsts;
 import com.sample.core.core.driver.WebDriverManager;
 import com.sample.core.core.injector.Injector;
 import com.sample.core.utils.PropertiesLoader;

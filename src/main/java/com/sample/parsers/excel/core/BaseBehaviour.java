@@ -1,11 +1,11 @@
-package com.sample.parsers.excel.base;
+package com.sample.parsers.excel.core;
 
 
 import com.sample.parsers.excel.utils.ExcelFileUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Row;
 
-import static com.sample.project.constants.CommonConsts.FILE_PATH;
+import static com.sample.constants.CommonConsts.FILE_PATH;
 
 
 public class BaseBehaviour {
