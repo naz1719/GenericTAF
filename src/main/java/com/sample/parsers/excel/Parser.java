@@ -13,6 +13,9 @@ import static com.sample.constants.CommonConsts.SAMPLE_SHEET;
 
 public class Parser {
 
+//    copyFileUsingApacheCommonsIO(getExcelPath(), OUTPUT_DIRECTORY);
+//    FILE_PATH = OUTPUT_DIRECTORY + "\\" + getExcelPath();
+
     private BaseExcel baseExcel = new BaseExcel(FILE_PATH).openFile();
 
     public List<ProductList> retrieveAllProductsWithTitles() {
