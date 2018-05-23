@@ -131,7 +131,7 @@ public class BaseExcel {
                     string = cellValue.getStringCellValue();
                     break;
                 case BLANK:
-                    string = "Empty Cell";
+                    string = "0.0";
                     break;
                 case ERROR:
                     string = String.valueOf(cellValue.getErrorCellValue());
