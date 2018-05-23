@@ -1,4 +1,4 @@
-package com.sample.project.enums;
+package com.sample.core.enums;
 
 public enum Drivers {
     CHROME("chrome"),

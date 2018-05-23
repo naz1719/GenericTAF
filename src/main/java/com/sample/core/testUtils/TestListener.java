@@ -1,6 +1,6 @@
-package com.sample.project.testUtils;
+package com.sample.core.testUtils;
 
-import com.sample.project.core.driver.WebDriverManager;
+import com.sample.core.core.driver.WebDriverManager;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;

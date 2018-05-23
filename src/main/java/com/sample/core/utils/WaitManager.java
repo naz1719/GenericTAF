@@ -1,7 +1,7 @@
-package com.sample.project.utils;
+package com.sample.core.utils;
 
-import com.sample.project.core.elements.Element;
-import com.sample.project.core.driver.WebDriverManager;
+import com.sample.core.core.elements.Element;
+import com.sample.core.core.driver.WebDriverManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
-import static com.sample.project.core.driver.WebDriverManager.getDriver;
+import static com.sample.core.core.driver.WebDriverManager.getDriver;
 
 
 public class WaitManager {

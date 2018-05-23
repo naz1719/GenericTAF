@@ -1,7 +1,7 @@
-package com.sample.project.testUtils;
+package com.sample.core.testUtils;
 
 import com.sample.project.constants.CommonConsts;
-import com.sample.project.utils.PropertiesLoader;
+import com.sample.core.utils.PropertiesLoader;
 import io.qameta.allure.Step;
 import org.apache.log4j.*;
 

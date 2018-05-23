@@ -1,6 +1,6 @@
-package com.sample.project.core.elements;
+package com.sample.core.core.elements;
 
-import com.sample.project.testUtils.TestLogger;
+import com.sample.core.testUtils.TestLogger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;

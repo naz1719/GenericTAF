@@ -1,10 +1,10 @@
-package com.sample.project.testUtils;
+package com.sample.core.testUtils;
 
 import com.sample.project.constants.CommonConsts;
-import com.sample.project.core.driver.WebDriverManager;
-import com.sample.project.core.injector.Injector;
-import com.sample.project.utils.PropertiesLoader;
-import com.sample.project.utils.WaitManager;
+import com.sample.core.core.driver.WebDriverManager;
+import com.sample.core.core.injector.Injector;
+import com.sample.core.utils.PropertiesLoader;
+import com.sample.core.utils.WaitManager;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;

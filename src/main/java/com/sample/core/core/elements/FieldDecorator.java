@@ -1,4 +1,4 @@
-package com.sample.project.core.elements;
+package com.sample.core.core.elements;
 
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;

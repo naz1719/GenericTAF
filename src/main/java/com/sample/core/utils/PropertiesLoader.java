@@ -1,4 +1,4 @@
-package com.sample.project.utils;
+package com.sample.core.utils;
 
 import java.io.IOException;
 import java.util.Properties;

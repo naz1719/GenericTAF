@@ -1,8 +1,8 @@
-package com.sample.project.core.driver;
+package com.sample.core.core.driver;
 
 import com.sample.project.constants.CommonConsts;
-import com.sample.project.enums.Drivers;
-import com.sample.project.utils.PropertiesLoader;
+import com.sample.core.enums.Drivers;
+import com.sample.core.utils.PropertiesLoader;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

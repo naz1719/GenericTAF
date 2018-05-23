@@ -1,4 +1,4 @@
-package com.sample.project.core.injector;
+package com.sample.core.core.injector;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

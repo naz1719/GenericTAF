@@ -1,7 +1,7 @@
-package com.sample.project.core.driver;
+package com.sample.core.core.driver;
 
 
-import com.sample.project.testUtils.TestLogger;
+import com.sample.core.testUtils.TestLogger;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;

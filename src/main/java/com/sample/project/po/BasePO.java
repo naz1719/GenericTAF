@@ -1,8 +1,8 @@
 package com.sample.project.po;
 
-import com.sample.project.testUtils.TestLogger;
-import com.sample.project.utils.WaitManager;
-import com.sample.project.core.driver.WebDriverManager;
+import com.sample.core.testUtils.TestLogger;
+import com.sample.core.utils.WaitManager;
+import com.sample.core.core.driver.WebDriverManager;
 import org.openqa.selenium.support.PageFactory;
 
 public class BasePO {
