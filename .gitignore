@@ -1,9 +1,14 @@
 
-/.idea/
-/SDL_UI.iml
+# Project Files
 *.log
-/target/
 /allure-results/
 /.allure/
 /test-output/
 /testUtils-output/
+
+#Intelij files
+/SDL_UI.iml
+/.idea/
+
+# maven pr
+/target/
