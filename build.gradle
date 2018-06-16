@@ -48,9 +48,6 @@ buildscript {
     }
 }
 
-clean.doFirst {
-    delete "test-output"
-}
 
 allure {
     aspectjweaver = true
@@ -61,8 +58,11 @@ allure {
         version = allure_version
     }
 
-//    resultsDir = file('build/allure-results')
-    reportDir = file('../../allure-results')
+    reportDir = file("$project.projectDir/allure-results")
+}
+
+clean.doFirst{
+    delete "test-output", "allure-resultss"
 }
 
 tasks.withType(Test) {
@@ -71,16 +71,6 @@ tasks.withType(Test) {
         useDefaultListeners = true
     }
     finalizedBy 'allureReport'
-
-    /*
-       project parallelism provides executing test on all available processor (this provides by "maxParallelForks" ), also allow
-       how many classes execute on every class (this provides by "forkEvery" which we enter over console)
-       */
-    if (project.hasProperty('maxParallelForks'))
-        maxParallelForks = project.maxParallelForks as int
-    if (project.hasProperty('forkEvery'))
-        forkEvery = project.forkEvery as int
-
 }
 
 
