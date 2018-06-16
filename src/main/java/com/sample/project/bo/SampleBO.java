@@ -15,12 +15,6 @@ public class SampleBO extends BaseBO {
         return this;
     }
 
-    public SampleBO clickOnAvocadoToolsTab(){
-        step("Click on 'AvocadoToolsTab'");
-        samplePO.act_clickAvocadoToolsTab();
-        return this;
-    }
-
 
     public void openPortal(String url){
         super.openPortal(url);

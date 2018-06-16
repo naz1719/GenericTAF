@@ -7,8 +7,13 @@
 /testUtils-output/
 
 #Intelij files
-/SDL_UI.iml
+/AutomationUI.iml
 /.idea/
 
-# maven pr
+#Gradle Files
+/build/
+/.gradle/
+/out/
+
+#Maven Files
 /target/

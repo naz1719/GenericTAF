@@ -17,8 +17,8 @@ public class LoginCheckTest extends BaseTestClass {
     @Test
     public void testCheckLogin() {
         sampleBO.openPortal(WEB_SITE_URL);
-        sampleBO
-                .clickOnBuildingBlocks();
+//        sampleBO
+//                .clickOnBuildingBlocks();
 
     }
 }
