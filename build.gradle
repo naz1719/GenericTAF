@@ -62,10 +62,12 @@ allure {
 }
 
 clean.doFirst{
-    delete "test-output", "allure-resultss"
+    delete "test-output", "allure-results"
 }
 
 tasks.withType(Test) {
+//    clean output of the test
+    outputs.upToDateWhen { false }
     useTestNG() {
         outputDirectory = file("$project.buildDir//testng-output")
         useDefaultListeners = true
