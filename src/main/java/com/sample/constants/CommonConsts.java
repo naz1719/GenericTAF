@@ -12,7 +12,8 @@ public final class CommonConsts {
 
     //  File & Path & Sheet constants
     public static final String FOLDER_PATH = ".";
-    public static final String OUTPUT = "output";
+    public static final String OUTPUT_DIRECTORY = "output";
+
     public static String FILE_PATH = "file.xlsx";
     public static String SAMPLE_SHEET = "sheetName";
 

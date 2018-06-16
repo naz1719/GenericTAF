@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.sample.constants.CommonConsts.OUTPUT;
+import static com.sample.constants.CommonConsts.OUTPUT_DIRECTORY;
 
 public class CSVWriter {
 
@@ -38,7 +38,7 @@ public class CSVWriter {
         List<Villa> list = Arrays.asList(new Villa("Title","price"),new Villa("Title2","price2"));
 
         CSVWriter csvParser = new CSVWriter();
-        csvParser.writeCsvFromBean(Paths.get(OUTPUT+"/"+fileName), list);
+        csvParser.writeCsvFromBean(Paths.get(OUTPUT_DIRECTORY +"/"+fileName), list);
     }
 
 }
