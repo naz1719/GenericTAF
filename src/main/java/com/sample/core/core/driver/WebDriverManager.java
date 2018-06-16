@@ -24,7 +24,7 @@ public class WebDriverManager {
     }
 
     private static WebDriver createAndGetDriver() {
-        LOG.info("Starting new browser instance");
+//        LOG.info("Starting new browser instance");
         WebDriver driver = webDriverFactory.getDriverInstance();
         pool.set(driver);
         return driver;
@@ -32,12 +32,20 @@ public class WebDriverManager {
 
     public static void stop() {
         WebDriver driver = getDriver();
-        LOG.info("Stopping browser.");
-        removeDriverFromDriverPool();
-        if (driver != null) {
+//        LOG.info("Stopping browser.");
+        try {
+            for (String handle : driver.getWindowHandles()) {
+                driver.switchTo().window(handle);
+                driver.close();
+            }
             driver.quit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            removeDriverFromDriverPool();
         }
-        LOG.info("Browser has been stopped.");
+
+//        LOG.info("Browser has been stopped.");
     }
 
     public static void load(String path) {

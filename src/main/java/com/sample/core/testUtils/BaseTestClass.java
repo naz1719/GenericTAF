@@ -5,10 +5,7 @@ import com.sample.core.core.driver.WebDriverManager;
 import com.sample.core.core.injector.Injector;
 import com.sample.core.utils.PropertiesLoader;
 import com.sample.core.utils.WaitManager;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
+import org.testng.annotations.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -45,6 +42,17 @@ public abstract class BaseTestClass {
         LOG.drop();
         WebDriverManager.stop();
     }
+
+//    @AfterClass
+//    public void dropAllDrivers() {
+//        try {
+//            Runtime.getRuntime().exec("taskkill /IM chromedriver.exe /F");
+//            Runtime.getRuntime().exec("taskkill /IM chrome.exe /F");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
 
     private void createInstance() {
         Class<?> clazz = this.getClass();
