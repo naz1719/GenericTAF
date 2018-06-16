@@ -16,7 +16,8 @@ public class TestLogger {
         BasicConfigurator.resetConfiguration();
 
         FileAppender fileAppender = new FileAppender();
-        fileAppender.setFile(String.format("%s/testUtils-output/logs/%s/%s.log", System.getProperty("user.dir"), className, testName));
+        String fileName =String.format("%s\\testUtils-output\\logs\\%s\\%s.log", System.getProperty("user.dir"), className, testName);
+        fileAppender.setFile(fileName);
         fileAppender.setLayout(new PatternLayout("[%-5p] %d{HH:mm:ss} %c: %m%n"));
         fileAppender.setAppend(false);
         fileAppender.setName("FileAppender");

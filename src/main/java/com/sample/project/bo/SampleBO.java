@@ -15,9 +15,4 @@ public class SampleBO extends BaseBO {
         return this;
     }
 
-
-    public void openPortal(String url){
-        super.openPortal(url);
-    }
-
 }
