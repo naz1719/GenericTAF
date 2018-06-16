@@ -1,4 +1,4 @@
-package com.sample.core.core.enums;
+package com.sample.core.core.driver;
 
 public enum Drivers {
     CHROME("chrome"),
@@ -13,7 +13,7 @@ public enum Drivers {
     }
 
     public static Drivers getDriverType(String driverValue) {
-        for (Drivers drivers : values()) {
+        for (Drivers drivers : Drivers.values()) {
             if (drivers.getDriverValue().equalsIgnoreCase(driverValue)) {
                 return drivers;
             }
