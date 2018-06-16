@@ -1,0 +1,93 @@
+apply plugin: 'java'
+apply plugin: 'io.qameta.allure'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+group = 'com.sample'
+version = '1.0-SNAPSHOT'
+
+description = """Automation Framework"""
+
+sourceCompatibility = 1.8
+
+ext {
+    allure_version = '2.6.0'
+}
+
+
+repositories {
+    maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'com.github.windriverteam', name: 'windriver-java', version: '0.1.0'
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+    compile group: 'org.apache.poi', name: 'poi', version: '3.17'
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.5.3'
+    testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
+    compile group: 'io.qameta.allure', name: 'allure-testng', version: allure_version
+    testCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
+}
+jar {
+    manifest {
+        attributes "Main-Class": "com.sample.project.Main"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+// to generate jar use this command  "gradle shadowJar"
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
+        classpath "io.qameta.allure:allure-gradle:2.5"
+    }
+}
+
+clean.doFirst {
+    delete "test-output"
+}
+
+allure {
+    aspectjweaver = true
+    autoconfigure = true
+    version = allure_version
+
+    useTestNG {
+        version = allure_version
+    }
+
+//    resultsDir = file('build/allure-results')
+    reportDir = file('../../allure-results')
+}
+
+tasks.withType(Test) {
+    useTestNG() {
+        outputDirectory = file("$project.buildDir//testng-output")
+        useDefaultListeners = true
+    }
+    finalizedBy 'allureReport'
+
+    /*
+       project parallelism provides executing test on all available processor (this provides by "maxParallelForks" ), also allow
+       how many classes execute on every class (this provides by "forkEvery" which we enter over console)
+       */
+    if (project.hasProperty('maxParallelForks'))
+        maxParallelForks = project.maxParallelForks as int
+    if (project.hasProperty('forkEvery'))
+        forkEvery = project.forkEvery as int
+
+}
+
+
+
+task runBot(type: Test) {
+    include "com/sample/project/LoginCheckTest.class"
+}
+
+
+
