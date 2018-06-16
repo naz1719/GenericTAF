@@ -3,12 +3,13 @@ package com.sample.core.utils;
 import com.sample.core.core.elements.Element;
 import com.sample.core.core.driver.WebDriverManager;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
 
+import java.util.NoSuchElementException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import static com.sample.core.core.driver.WebDriverManager.getDriver;
 
@@ -26,6 +27,9 @@ public class WaitManager {
     private TimeUnit timeUnitForTimeOut;
     private long polling;
     private TimeUnit timeUnitForPolling;
+
+    private static final int COUNT_RETRY_INCYCLE = 50;
+    private static final int RETRY_CYCLE_SLEEP = 500;
 
     public WaitManager(int timeOut, TimeUnit unit) {
         this.timeOut = timeOut;
@@ -75,14 +79,15 @@ public class WaitManager {
         webDriverWait.until(expectedCondition);
     }
 
-    public static void sleepTimeOut(int millisecond){
+    public static void sleepTimeOut(int millisecond) {
         try {
             Thread.sleep(millisecond);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-    public static void waitTimeOut(int   time) {
+
+    public static void waitTimeOut(int time) {
         getDriver().manage().timeouts().implicitlyWait(time, TimeUnit.MILLISECONDS);
     }
 
@@ -96,8 +101,7 @@ public class WaitManager {
             try {
                 if (isClickable(element)) {
                     return;
-                }
-                else{
+                } else {
                     Sleeper.SYSTEM_SLEEPER.sleep(new Duration(DURATION, DEFAULT_TIME_UNIT));
                 }
             } catch (InterruptedException e) {
@@ -135,51 +139,85 @@ public class WaitManager {
         LOG.debug(message);
     }
 
-    private void waitForPageToBeReady() {
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-
-        //This loop will rotate for 100 times to check If page Is ready after every 1 second.
-        //You can replace your if you wants to Increase or decrease wait time.
-        for (int i = 0; i < 400; i++) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                error(e.getMessage());
-            }
-            //To check page ready state.
-
-            if (js.executeScript("return document.readyState").toString().equals("complete")) {
-                break;
+    /*
+    Method waiting for 2 conditions to indicate that page is ready for further interactions
+    Condition 1 - JS verification than document has ready state
+    Condition 2 - Page loading spinner is not displayed
+    Notes: best value for sleep after checking elements state is 500, decreasing this value could prevent to instability of tests execution
+     */
+    public void waitForPageToBeReady() {
+        debug("Start of page waiter");
+        for (int i = 0; i < COUNT_RETRY_INCYCLE; i++) {
+            debug("\n waiting for all conditions. Count:" + i);
+            for (int j = 0; j < COUNT_RETRY_INCYCLE; j++) {
+                debug("\n waiting till pageIsReady state true. Count:" + j);
+                JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getDriver();
+                if (js.executeScript("return document.readyState").toString().equals("complete")) {
+                    break;
+                }
+                try {
+                    Thread.sleep(RETRY_CYCLE_SLEEP);
+                } catch (Exception e) {
+                    error(e.getLocalizedMessage());
+                }
             }
         }
+        debug("End of page waiter");
     }
 
-    public void waitTillPageLoaded() {
-        waitForPageToBeReady();
-        for (int i = 0; i < 10; i++) {
-            debug("Try number [" + i + "] to detect if page is loading.");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                error(e.getMessage());
-            }
-            String status = "style";
-            if (status.contains("display: none")) {
-                debug("Waiter element not shown. Page looks as loaded.");
-                //Element needed to garantthat page loaded
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    error(e.getMessage());
+    public void fluentElementWait(WebElement webElement) {
+        debug("Start of page waiter");
+        boolean pageIsReady = false;
+        boolean pageIsLoading = true;
+        for(int i = 0; i < COUNT_RETRY_INCYCLE; i++) {
+            debug("\n waiting for all conditions. Count:" + i);
+            for (int j = 0; j < COUNT_RETRY_INCYCLE; j++) {
+                debug("\n waiting till pageIsReady state true. Count:" + j);
+                JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getDriver();
+                if (js.executeScript("return document.readyState").toString().equals("complete")) {
+                    pageIsReady = true;
+                    break;
                 }
-                return;
+                try {
+                    Thread.sleep(RETRY_CYCLE_SLEEP);
+                } catch (Exception e) {
+                    error(e.getLocalizedMessage());
+                }
             }
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                error(e.getMessage());
+            if (pageIsReady) {
+                for (int k = 0; k < COUNT_RETRY_INCYCLE; k++) {
+                    debug("\n waiting till pageIsLoading state false. Count:" + k);
+                    Wait<WebDriver> wait = new FluentWait<>(WebDriverManager.getDriver())
+                            .withTimeout(DEFAULT_TIME_OUT, DEFAULT_TIME_UNIT)
+                            .pollingEvery(DEFAULT_POLLING, DEFAULT_TIME_UNIT)
+                            .ignoring(NoSuchElementException.class);
+                    WebElement element = wait.until(driver -> webElement);
+
+                    if (element != null) {
+                        try{
+                            String statusValue = element.getAttribute("style");
+                            if (statusValue.equalsIgnoreCase("display: none;"))
+                                pageIsLoading = false;
+                            break;
+                        }
+                        catch (org.openqa.selenium.StaleElementReferenceException e){
+                            debug("spinner element was refreshed, page was overloaded.");
+                            pageIsReady = false;
+                            continue;
+                        }
+                    }
+                    try {
+                        Thread.sleep(RETRY_CYCLE_SLEEP);
+                    } catch (Exception e) {
+                        error(e.getLocalizedMessage());
+                    }
+                }
             }
-            break;
+            if(!pageIsLoading & pageIsReady)
+                break;
+        }
+        if(pageIsLoading || !pageIsReady){
+            error("Page wasn't loaded successfully");
         }
         debug("End of page waiter");
     }
