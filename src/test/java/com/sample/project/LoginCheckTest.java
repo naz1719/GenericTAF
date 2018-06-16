@@ -9,8 +9,8 @@ import static com.sample.constants.CommonConsts.WEB_SITE_URL;
 
 public class LoginCheckTest extends BaseTestClass {
 
-// For parallel running put in inside test
-    private SampleBO sampleBO = new SampleBO();
+    @Injector
+    private SampleBO sampleBO;
 
     @Test(skipFailedInvocations = true)
     public void testCheckLogin() {
