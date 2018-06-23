@@ -3,6 +3,7 @@ package com.sample.core.core.driver;
 public enum Drivers {
     CHROME("chrome"),
     IE("internet explorer"),
+    FIREFOX("firefox"),
     REMOTE_WEB_DRIVER("remote web driver"),
     NULL("null driver");
 

@@ -6,6 +6,8 @@ import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -19,7 +21,6 @@ import java.util.concurrent.TimeUnit;
 public class WebDriverFactory {
 
     protected PropertiesLoader propertiesLoader = new PropertiesLoader(CommonConsts.PATH_TO_CONFIGURATION_PROPERTIES);
-
 
 
     public WebDriver getDriverInstance() {
@@ -52,6 +53,12 @@ public class WebDriverFactory {
                 ieDriver.manage().window().maximize();
                 return ieDriver;
 
+            case FIREFOX:
+                System.setProperty("webdriver.gecko.driver", propertiesLoader.getFirefoxDriverPath());
+                WebDriver firefoxDriver = new FirefoxDriver(getFirefoxCapabilities());
+                firefoxDriver.manage().timeouts().implicitlyWait(propertiesLoader.getImplicitlyWaitTimeout(), TimeUnit.SECONDS);
+                return firefoxDriver;
+
             case REMOTE_WEB_DRIVER:
                 WebDriver driver = null;
                 URL url = null;
@@ -80,6 +87,13 @@ public class WebDriverFactory {
         chromeOptions.addArguments("--no-sandbox");
         chromeCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
         return chromeCapabilities;
+    }
+
+    private DesiredCapabilities getFirefoxCapabilities() {
+        DesiredCapabilities firefoxCapabilities = DesiredCapabilities.firefox();
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxCapabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, firefoxOptions);
+        return firefoxCapabilities;
     }
 
     private DesiredCapabilities getInternetExplorerCapabilities() {
