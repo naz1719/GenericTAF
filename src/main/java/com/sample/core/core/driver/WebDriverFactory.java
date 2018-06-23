@@ -61,7 +61,9 @@ public class WebDriverFactory {
                 firefoxDriver.manage().timeouts().implicitlyWait(propertiesLoader.getImplicitlyWaitTimeout(), TimeUnit.SECONDS);
                 return firefoxDriver;
             case HTML_UNIT_DRIVER:
-                return new HtmlUnitDriver();
+                HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver();
+                htmlUnitDriver.setJavascriptEnabled(true);
+                return htmlUnitDriver;
 
             case GHOST_DRIVER:
                 DesiredCapabilities DesireCaps = new DesiredCapabilities();
