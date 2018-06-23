@@ -4,6 +4,10 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -12,6 +16,18 @@ import java.util.regex.Pattern;
 import static com.sample.constants.CommonConsts.FOLDER_PATH;
 
 public class Utils {
+
+    public void writeLineToFile(List<String> list, String path) {
+        list.forEach(name -> {
+            Path p = Paths.get(path + "\\" + name);
+            String s = System.lineSeparator() + "\nauth-user-pass auth.txt";
+            try {
+                Files.write(p, s.getBytes(), StandardOpenOption.APPEND);
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+        });
+    }
 
     public static boolean isStream(String input) {
         final Pattern pattern = Pattern.compile("([a-zA-Z0-9]+)-([a-zA-Z0-9]+)");
