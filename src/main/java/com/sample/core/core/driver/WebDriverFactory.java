@@ -8,7 +8,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -58,6 +60,16 @@ public class WebDriverFactory {
                 WebDriver firefoxDriver = new FirefoxDriver(getFirefoxCapabilities());
                 firefoxDriver.manage().timeouts().implicitlyWait(propertiesLoader.getImplicitlyWaitTimeout(), TimeUnit.SECONDS);
                 return firefoxDriver;
+            case HTML_UNIT_DRIVER:
+                return new HtmlUnitDriver();
+
+            case GHOST_DRIVER:
+                DesiredCapabilities DesireCaps = new DesiredCapabilities();
+//                DesireCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, propertiesLoader.getGhostDriverPath());
+                System.setProperty("phantomjs.binary.path", propertiesLoader.getGhostDriverPath());
+
+                WebDriver ghostDriver = new PhantomJSDriver();
+                return ghostDriver;
 
             case REMOTE_WEB_DRIVER:
                 WebDriver driver = null;
@@ -72,6 +84,7 @@ public class WebDriverFactory {
                 driver.manage().timeouts().implicitlyWait(propertiesLoader.getImplicitlyWaitTimeout(), TimeUnit.SECONDS);
                 driver.manage().window().maximize();
                 return driver;
+
         }
         throw new RuntimeException("Unsupported driver type");
     }

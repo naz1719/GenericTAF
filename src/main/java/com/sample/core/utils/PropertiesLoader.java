@@ -30,6 +30,9 @@ public class PropertiesLoader {
     public String getFirefoxDriverPath() {
         return properties.getProperty("firefoxDriver");
     }
+    public String getGhostDriverPath() {
+        return properties.getProperty("ghostDriver");
+    }
 
     public String getInternetExplorerDriver_32Path() {
         return properties.getProperty("internetExplorerDriver_32");

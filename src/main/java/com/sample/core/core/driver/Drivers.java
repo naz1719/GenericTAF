@@ -5,6 +5,8 @@ public enum Drivers {
     IE("internet explorer"),
     FIREFOX("firefox"),
     REMOTE_WEB_DRIVER("remote web driver"),
+    HTML_UNIT_DRIVER("html unit driver"),
+    GHOST_DRIVER("ghost driver"),
     NULL("null driver");
 
     private String driverValue;
