@@ -18,6 +18,7 @@ repositories {
     maven { url "http://repo.maven.apache.org/maven2" }
 }
 dependencies {
+    compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.9'
     compile group: 'com.github.windriverteam', name: 'windriver-java', version: '0.1.0'
     compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
     compile group: 'org.apache.poi', name: 'poi', version: '3.17'

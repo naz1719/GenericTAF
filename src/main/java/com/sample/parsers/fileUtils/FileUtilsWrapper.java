@@ -4,6 +4,8 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,8 +17,10 @@ import java.util.regex.Pattern;
 
 import static com.sample.constants.CommonConsts.FOLDER_PATH;
 
-public class Utils {
-
+public class FileUtilsWrapper {
+    public static void saveFileFromUrlWithCommonsIO(String url, String fileName) throws MalformedURLException, IOException {
+        org.apache.commons.io.FileUtils.copyURLToFile(new URL(url), new File(fileName));
+    }
     public void writeLineToFile(List<String> list, String path) {
         list.forEach(name -> {
             Path p = Paths.get(path + "\\" + name);
@@ -73,7 +77,7 @@ public class Utils {
 
     public static void copyFileUsingApacheCommonsIO(String source, String dest) {
         try {
-            FileUtils.copyFileToDirectory(new File(source), new File(dest));
+            org.apache.commons.io.FileUtils.copyFileToDirectory(new File(source), new File(dest));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -112,7 +116,7 @@ public class Utils {
 
         try {
             File path1 = new File(path + string + ".html");
-            FileUtils.writeStringToFile(path1, source);
+            org.apache.commons.io.FileUtils.writeStringToFile(path1, source);
         } catch (IOException e) {
             e.printStackTrace();
         }

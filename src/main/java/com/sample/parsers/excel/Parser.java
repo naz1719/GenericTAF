@@ -9,10 +9,7 @@ import com.sample.parsers.excel.model.payloads.ProductList;
 import java.util.List;
 
 import static com.sample.constants.CommonConsts.FILE_PATH;
-import static com.sample.constants.CommonConsts.OUTPUT_DIRECTORY;
 import static com.sample.constants.CommonConsts.SAMPLE_SHEET;
-import static com.sample.parsers.fileUtils.Utils.copyFileUsingApacheCommonsIO;
-import static com.sample.parsers.fileUtils.Utils.getExcelPath;
 
 public class Parser {
 
