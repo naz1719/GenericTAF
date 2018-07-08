@@ -25,10 +25,10 @@ public class ExcelModelTitleProcessor {
     }
 
 
-//    public static Product processFirstPV(List<ProductEx> products) {
-//        List<Product> pvModelsList = processAllProducts(products);
-//        return pvModelsList.get(0);
-//    }
+    public static ProductList processFirstPV(List<ProductEx> products) {
+        List<ProductList> pvModelsList = processAllProducts(products);
+        return pvModelsList.get(0);
+    }
 
 
     private static List<String> getTitle(List<ProductEx> products) {

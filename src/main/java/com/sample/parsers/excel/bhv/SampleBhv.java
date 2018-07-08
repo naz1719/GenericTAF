@@ -12,7 +12,7 @@ import static com.sample.parsers.excel.utils.CellStyleUtils.getStandardCellStyle
 
 public class SampleBhv extends BaseBhv {
     private BaseExcel baseExcel = new BaseExcel(FILE_PATH).openFile();
-    private Sheet sheet = baseExcel.getSheet(SAMPLE_SHEET);
+    private Sheet sheet = baseExcel.getSheet(SHEET1);
 
     private CellStyle headerStyle = getCellSHeaderStyle(baseExcel);
 

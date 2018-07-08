@@ -1,7 +1,5 @@
 package com.sample.parsers.fileUtils;
 
-import org.apache.commons.io.FileUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -39,13 +37,13 @@ public class FileUtilsWrapper {
         return matcher.matches();
     }
 
-    public static boolean getExcelFilesNames(String input) {
-        final Pattern pattern = Pattern.compile("(\\w)+(.(xlsx|xlx|xls))");
+    public static boolean getExcelFilesList(String input) {
+        final Pattern pattern = Pattern.compile("(.*)(.(xlsx|xlx|xls))");
         final Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }
 
-    public static String getExcelPath() {
+    public static String getExcel() {
         final File folder = new File(FOLDER_PATH);
         List<String> list = listFilesForFolder(folder);
 
@@ -58,7 +56,7 @@ public class FileUtilsWrapper {
             if (fileEntry.isDirectory()) {
                 listFilesForFolder(fileEntry);
             } else {
-                if (getExcelFilesNames(fileEntry.getName())) {
+                if (getExcelFilesList(fileEntry.getName())) {
                     list.add(fileEntry.getName());
                 }
             }
