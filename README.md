@@ -1,6 +1,5 @@
 
-# Selenium Automation Project
-It's UI Automation project for set upping UI framework from skeleton.
+# GitHub API Jobs testing Automation Project
 
 ### Run
 mvn -Dtest=LoginCheckTest#openUrlTest test
