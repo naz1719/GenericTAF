@@ -32,7 +32,7 @@ dependencies {
 
 jar {
     manifest {
-        attributes "Main-Class": "com.sample.project.Main"
+        attributes "Main-Class": "project.Main"
     }
 
     from {
