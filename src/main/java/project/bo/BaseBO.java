@@ -1,9 +1,9 @@
 package project.bo;
 
 import project.po.BasePO;
-import core.testUtils.TestLogger;
-import core.utils.WaitManager;
-import core.core.driver.WebDriverManager;
+import execution.logger.TestLogger;
+import features.wait.WaitManager;
+import adaptation.ui.driver.WebDriverManager;
 
 public abstract class BaseBO {
     protected WaitManager waitManager = new WaitManager();

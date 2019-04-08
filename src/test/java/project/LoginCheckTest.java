@@ -1,9 +1,9 @@
 package project;
 
-import core.core.driver.WebDriverManager;
+import adaptation.ui.driver.WebDriverManager;
 import project.bo.FrontBO;
-import core.core.injector.Injector;
-import core.testUtils.BaseTestClass;
+import adaptation.ui.injector.Injector;
+import execution.BaseTestClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
