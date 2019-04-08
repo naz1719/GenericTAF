@@ -36,7 +36,7 @@ public class WebDriverFactory {
         return getDriverInstance(driverType);
     }
 
-    public WebDriver getDriverInstance(Drivers driverType) {
+    private WebDriver getDriverInstance(Drivers driverType) {
 
         switch (driverType) {
 
