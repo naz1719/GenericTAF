@@ -1,6 +1,7 @@
-package definition.bo;
+package definition.ui.bo;
 
-import definition.po.FrontPO;
+import definition.ui.BaseBO;
+import definition.ui.po.FrontPO;
 
 public class FrontBO extends BaseBO {
     private FrontPO frontPO;

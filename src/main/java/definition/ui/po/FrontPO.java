@@ -1,6 +1,7 @@
-package definition.po;
+package definition.ui.po;
 
 
+import definition.ui.BasePO;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

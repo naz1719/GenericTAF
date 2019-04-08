@@ -1,9 +1,10 @@
 package tests;
 
 import adaptation.ui.driver.WebDriverManager;
-import definition.bo.FrontBO;
+import definition.ui.bo.FrontBO;
 import adaptation.ui.injector.Injector;
 import execution.BaseTestClass;
+import features.wait.WaitManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -23,7 +24,8 @@ public class LoginCheckTest extends BaseTestClass {
         webElement.sendKeys("Hey");
         webElement.submit();
 
-        Thread.sleep(4000);
+        WaitManager.sleepTimeOut(4000);
+
 //        frontBO
 //                .clickOnBuildingBlocks();
 

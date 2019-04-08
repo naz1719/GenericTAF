@@ -1,6 +1,5 @@
-package definition.bo;
+package definition.ui;
 
-import definition.po.BasePO;
 import execution.logger.TestLogger;
 import features.wait.WaitManager;
 import adaptation.ui.driver.WebDriverManager;

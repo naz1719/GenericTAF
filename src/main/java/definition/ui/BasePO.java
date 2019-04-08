@@ -1,4 +1,4 @@
-package definition.po;
+package definition.ui;
 
 import execution.logger.TestLogger;
 import features.wait.WaitManager;
