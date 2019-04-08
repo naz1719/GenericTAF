@@ -16,11 +16,14 @@ public class LoginCheckTest extends BaseTestClass {
     private FrontBO frontBO;
 
     @Test(skipFailedInvocations = true)
-    public void testCheckLogin() {
+    public void testCheckLogin() throws InterruptedException {
         frontBO.openPortal(WEB_SITE_URL);
         WebElement webElement = WebDriverManager.getDriver().findElement(By.name("q"));
         waitManager.fluentElementWait(webElement);
         webElement.sendKeys("Hey");
+        webElement.submit();
+
+        Thread.sleep(4000);
 //        frontBO
 //                .clickOnBuildingBlocks();
 
