@@ -41,8 +41,8 @@ public abstract class BaseTestClass {
 
     @AfterMethod
     public void dropDriver() {
-        LOG.drop();
         WebDriverManager.stop();
+        LOG.drop();
     }
 
 //    @AfterClass
