@@ -1,6 +1,6 @@
-package project.bo;
+package definition.bo;
 
-import project.po.BasePO;
+import definition.po.BasePO;
 import execution.logger.TestLogger;
 import features.wait.WaitManager;
 import adaptation.ui.driver.WebDriverManager;

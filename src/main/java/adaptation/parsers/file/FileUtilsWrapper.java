@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static constants.CommonConsts.FOLDER_PATH;
+import static definition.constants.CommonConsts.FOLDER_PATH;
 
 public class FileUtilsWrapper {
     public static void saveFileFromUrlWithCommonsIO(String url, String fileName) throws MalformedURLException, IOException {

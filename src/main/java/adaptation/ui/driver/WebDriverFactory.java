@@ -1,6 +1,6 @@
 package adaptation.ui.driver;
 
-import constants.CommonConsts;
+import definition.constants.CommonConsts;
 import features.propertyLoader.PropertiesLoader;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;

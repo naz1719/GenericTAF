@@ -1,4 +1,4 @@
-package project.model;
+package definition.model;
 
 public class User {
     private String login;

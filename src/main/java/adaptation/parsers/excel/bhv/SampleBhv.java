@@ -7,7 +7,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
-import static constants.CommonConsts.*;
+import static definition.constants.CommonConsts.*;
 
 public class SampleBhv extends BaseBhv {
     private BaseExcel baseExcel = new BaseExcel(FILE_PATH).openFile();

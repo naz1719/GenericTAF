@@ -32,7 +32,7 @@ dependencies {
 
 jar {
     manifest {
-        attributes "Main-Class": "project.Main"
+        attributes "Main-Class": "definition.Main"
     }
 
     from {
@@ -81,7 +81,7 @@ tasks.withType(Test) {
 
 
 task runBot(type: Test) {
-    include "com/sample/project/LoginCheckTest.class"
+    include "com/sample/definition/LoginCheckTest.class"
 }
 
 

@@ -1,4 +1,4 @@
-package constants;
+package definition.constants;
 
 import java.util.Arrays;
 import java.util.List;

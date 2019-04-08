@@ -1,6 +1,6 @@
 package execution.logger;
 
-import constants.CommonConsts;
+import definition.constants.CommonConsts;
 import features.propertyLoader.PropertiesLoader;
 import io.qameta.allure.Step;
 import org.apache.log4j.*;

@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
-import static constants.CommonConsts.OUTPUT_DIRECTORY;
+import static definition.constants.CommonConsts.OUTPUT_DIRECTORY;
 
 public class CSVWriter {
 

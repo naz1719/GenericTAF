@@ -7,8 +7,7 @@ import adaptation.parsers.excel.model.excel.ProductEx;
 import adaptation.parsers.excel.model.payloads.ProductList;
 
 import java.util.List;
-
-import static constants.CommonConsts.*;
+import static definition.constants.CommonConsts.*;
 import static adaptation.parsers.file.FileUtilsWrapper.getExcel;
 
 public class Parser {

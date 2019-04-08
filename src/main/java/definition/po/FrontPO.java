@@ -1,4 +1,4 @@
-package project.po;
+package definition.po;
 
 
 import org.openqa.selenium.WebElement;

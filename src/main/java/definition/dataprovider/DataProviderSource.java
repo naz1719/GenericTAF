@@ -1,4 +1,4 @@
-package project.testUtils;
+package definition.dataprovider;
 
 import org.testng.ITestContext;
 import org.testng.annotations.DataProvider;

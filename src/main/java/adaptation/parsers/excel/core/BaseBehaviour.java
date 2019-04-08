@@ -5,7 +5,7 @@ import adaptation.parsers.excel.utils.ExcelFileUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Row;
 
-import static constants.CommonConsts.FILE_PATH;
+import static definition.constants.CommonConsts.FILE_PATH;
 
 
 public class BaseBehaviour {

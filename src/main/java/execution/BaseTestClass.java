@@ -1,6 +1,6 @@
 package execution;
 
-import constants.CommonConsts;
+import definition.constants.CommonConsts;
 import adaptation.ui.driver.WebDriverManager;
 import adaptation.ui.injector.Injector;
 import execution.logger.TestListener;
