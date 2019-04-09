@@ -7,6 +7,7 @@ import execution.logger.TestListener;
 import execution.logger.TestLogger;
 import features.propertyLoader.PropertiesLoader;
 import features.wait.WaitManager;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import java.lang.annotation.Annotation;
@@ -22,6 +23,18 @@ public abstract class BaseTestClass {
     protected PropertiesLoader propertiesLoader = new PropertiesLoader(CommonConsts.PATH_TO_CONFIGURATION_PROPERTIES);
 
     protected TestLogger LOG;
+
+    @BeforeSuite(alwaysRun = true)
+    public void configureEnvProperties(ITestContext iTestContext) throws Exception {
+        String country = iTestContext.getSuite().getParameter("country");
+//        try {
+//            //must be done only once (not in each suite)
+//            EnvInitializer.initEnvProperties();
+//
+//        } catch (Throwable e) {
+//            throw new RuntimeException(e);
+//        }
+    }
 
     @BeforeClass
     public void browserInstantiate() {

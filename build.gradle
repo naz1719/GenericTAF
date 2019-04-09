@@ -64,20 +64,31 @@ allure {
     reportDir = file("$project.projectDir/allure-results")
 }
 
-clean.doFirst{
-    delete "test-output", "allure-results"
-}
+//clean.doFirst {
+//    delete "test-output", "allure-results"
+//}
+//
 
-tasks.withType(Test) {
-//    clean output of the test
-    outputs.upToDateWhen { false }
+//tasks.withType(Test) {
+////    clean output of the test
+//    outputs.upToDateWhen { false }
+//    useTestNG() {
+//        outputDirectory = file("$project.buildDir//testng-output")
+//    }
+////    finalizedBy 'allureReport'
+//}
+
+test {
     useTestNG() {
-        outputDirectory = file("$project.buildDir//testng-output")
-        useDefaultListeners = true
+        useDefaultListeners = false
+        if (project.hasProperty('FirstRegression')) {
+            suites 'src/test/resources/AllSuite.xml'
+        }
+        if (project.hasProperty('SecondRegression')) {
+            suites 'src/test/resources/AllSuite.xml'
+        }
     }
-    finalizedBy 'allureReport'
 }
-
 
 
 task runBot(type: Test) {

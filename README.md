@@ -2,7 +2,7 @@
 # GitHub API Jobs testing Automation Project
 
 ### Run
-mvn -Dtest=LoginCheckTest#openUrlTest test
+mvn -Dtest=tests.LoginCheckTest#openUrlTest test
 
 ### Allure Report
  1. allure generate xml report to target//allure-results	
