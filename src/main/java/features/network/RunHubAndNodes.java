@@ -5,6 +5,7 @@ import java.io.IOException;
 
 public class RunHubAndNodes {
 
+    public static final String COMMON_PATH = "./testData/web-selenium-server";
     private static String operatingSystem = System.getProperty("os.name").toLowerCase();
 
     private static File getAbsolutePath(String filePath) {
@@ -23,20 +24,20 @@ public class RunHubAndNodes {
 
     private static void runHubAndNodes() throws IOException {
         if (isWindows()) {
-            Runtime.getRuntime().exec("cmd /c start runHub.bat",null,  getAbsolutePath("./web-selenium-server/windows"));
-            Runtime.getRuntime().exec("cmd /c start runNode1.bat",null ,getAbsolutePath("./web-selenium-server/windows"));
-            Runtime.getRuntime().exec("cmd /c start runNode2.bat",null , getAbsolutePath("./web-selenium-server/windows"));
+            Runtime.getRuntime().exec("cmd /c start runHub.bat",null,  getAbsolutePath(COMMON_PATH + "/windows"));
+            Runtime.getRuntime().exec("cmd /c start runNode1.bat",null ,getAbsolutePath(COMMON_PATH + "/windows"));
+            Runtime.getRuntime().exec("cmd /c start runNode2.bat",null , getAbsolutePath(COMMON_PATH + "/windows"));
         } else if (isUnix()) {
-            Runtime.getRuntime().exec(getAbsolutePath("./web-selenium-server/unix/runHub.sh").getAbsolutePath());
-            Runtime.getRuntime().exec(getAbsolutePath("./web-selenium-server/unix/runNode1.sh").getAbsolutePath());
-            Runtime.getRuntime().exec(getAbsolutePath("./web-selenium-server/unix/runNode2.sh").getAbsolutePath());
+            Runtime.getRuntime().exec(getAbsolutePath(COMMON_PATH + "/unix/runHub.sh").getAbsolutePath());
+            Runtime.getRuntime().exec(getAbsolutePath(COMMON_PATH + "/unix/runNode1.sh").getAbsolutePath());
+            Runtime.getRuntime().exec(getAbsolutePath(COMMON_PATH + "/unix/runNode2.sh").getAbsolutePath());
         }
     }
 
     private static void stopHubAndNodes() {
         if (isWindows()) {
             try {
-                Runtime.getRuntime().exec("cmd /c start stopAllServersAndNodes.bat",null,  getAbsolutePath("./web-selenium-server"));
+                Runtime.getRuntime().exec("cmd /c start stopAllServersAndNodes.bat",null,  getAbsolutePath(COMMON_PATH));
             } catch (IOException e) {
                 e.printStackTrace();
             }
