@@ -62,7 +62,7 @@ allure {
         version = allure_version
     }
 
-    reportDir = file("$project.projectDir/output/allure-results")
+    reportDir = file("$project.projectDir/allure-results")
 }
 
 //clean.doFirst{
