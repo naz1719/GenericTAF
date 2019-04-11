@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public final class CommonConsts {
-    public static final String PATH_TO_CONFIGURATION_PROPERTIES = "./configuration.properties";
+    public static final String PATH_TO_CONFIGURATION_PROPERTIES = "configuration.properties";
     public static final String ESCAPE_PROPERTY = "org.uncommons.reportng.escape-output";
 
     //    URL constants

@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class TestListener implements ITestListener {
+    public static final String LOG_OUTPUT_PATH = "%s/output/logs/%s/%s.log";
+
     private TestLogger LOG;
     private String testName;
     private String className;
@@ -28,7 +30,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
         LOG.info(" [PASSED]");
-        File file = new File(String.format("%s/logger-output/logs/%s/%s.log", System.getProperty("user.dir"), className, testName));
+        File file = new File(String.format(LOG_OUTPUT_PATH, System.getProperty("user.dir"), className, testName));
         attachLog(file);
     }
 
@@ -36,7 +38,7 @@ public class TestListener implements ITestListener {
     public void onTestFailure(ITestResult iTestResult) {
         LOG.info("[FAILED]");
         captureScreenshot();
-        File file = new File(String.format("%s/logger-output/logs/%s/%s.log", System.getProperty("user.dir"), className, testName));
+        File file = new File(String.format(LOG_OUTPUT_PATH, System.getProperty("user.dir"), className, testName));
         attachLog(file);
     }
 
@@ -51,7 +53,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
         captureScreenshot();
-        File file = new File(String.format("%s/logger-output/logs/%s/%s.log", System.getProperty("user.dir"), className, testName));
+        File file = new File(String.format(LOG_OUTPUT_PATH, System.getProperty("user.dir"), className, testName));
         attachLog(file);
     }
 
