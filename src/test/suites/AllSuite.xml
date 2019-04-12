@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Omnichannel Multiple Suites regression suite">
     <suite-files>
-        <suite-file path="REGRESSION_UI_TESTS.xml"/>
-        <suite-file path="SMOKE_TESTS.xml"/>
+        <suite-file path="REGRESSION_TESTS.xml"/>
+        <!--<suite-file path="SMOKE_TESTS.xml"/>-->
     </suite-files>
 </suite>
