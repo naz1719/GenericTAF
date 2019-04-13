@@ -65,10 +65,6 @@ allure {
     reportDir = file("$project.projectDir/allure-results")
 }
 
-//clean.doFirst{
-//    delete "test-output", "allure-results"
-//}
-
 tasks.withType(Test) {
     useTestNG() {
         dependsOn cleanTest
