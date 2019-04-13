@@ -1,16 +1,10 @@
 package execution.logger;
 
-import adaptation.ui.driver.WebDriverManager;
-import io.qameta.allure.Attachment;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 
 public class TestListener implements ITestListener {
     public static final String LOG_OUTPUT_PATH = "%s/output/logs/%s/%s.log";
@@ -31,15 +25,15 @@ public class TestListener implements ITestListener {
     public void onTestSuccess(ITestResult iTestResult) {
         LOG.info(" [PASSED]");
         File file = new File(String.format(LOG_OUTPUT_PATH, System.getProperty("user.dir"), className, testName));
-        attachLog(file);
+        AllureLogger.attachLog(file);
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
         LOG.info("[FAILED]");
-        captureScreenshot();
+        AllureLogger.captureScreenshot();
         File file = new File(String.format(LOG_OUTPUT_PATH, System.getProperty("user.dir"), className, testName));
-        attachLog(file);
+        AllureLogger.attachLog(file);
     }
 
     @Override
@@ -52,9 +46,9 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-        captureScreenshot();
+        AllureLogger.captureScreenshot();
         File file = new File(String.format(LOG_OUTPUT_PATH, System.getProperty("user.dir"), className, testName));
-        attachLog(file);
+        AllureLogger.attachLog(file);
     }
 
     @Override
@@ -66,20 +60,5 @@ public class TestListener implements ITestListener {
         if (LOG != null) {
             LOG.drop();
         }
-    }
-
-    @Attachment(value = "Page screenshot", type = "image/png")
-    private byte[] captureScreenshot() {
-        return ((TakesScreenshot) WebDriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
-    }
-
-    @Attachment(value = "Log", type = "text/plain")
-    private byte[] attachLog(File file) {
-        try {
-            return Files.readAllBytes(file.toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }
