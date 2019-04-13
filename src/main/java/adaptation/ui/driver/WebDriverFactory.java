@@ -86,9 +86,9 @@ public class WebDriverFactory {
                 driver.manage().timeouts().implicitlyWait(propertiesLoader.getImplicitlyWaitTimeout(), TimeUnit.SECONDS);
                 driver.manage().window().maximize();
                 return driver;
-
+            default:
+                throw new RuntimeException("Unsupported driver type");
         }
-        throw new RuntimeException("Unsupported driver type");
     }
 
     private DesiredCapabilities getChromeCapabilities() {
