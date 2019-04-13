@@ -4,6 +4,10 @@ public class Villa {
     private String title;
     private String price;
 
+    public Villa(String title) {
+        this.title = title;
+    }
+
     public Villa(String title, String price) {
         this.title = title;
         this.price = price;
