@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         //------ Writing excel ---------
-        String fileName = "task1.csv";
+        String fileName = "file.csv";
         List<Villa> list = Arrays.asList(new Villa("Title", "price"), new Villa("Title2", "price2"));
 
         String filePath = OUTPUT_DIRECTORY + "/" + fileName;

@@ -7,10 +7,11 @@ import adaptation.parsers.excel.model.excel.ProductEx;
 import adaptation.parsers.excel.model.payloads.ProductList;
 
 import java.util.List;
-import static definition.constants.CommonConsts.*;
-import static adaptation.parsers.file.FileUtilsWrapper.getExcel;
 
-public class Parser {
+import static adaptation.parsers.file.FileUtilsWrapper.getExcel;
+import static definition.constants.CommonConsts.*;
+
+public class Main {
 
     static {
 //        copyFileUsingApacheCommonsIO(getExcel(), OUTPUT_DIRECTORY);
@@ -18,6 +19,11 @@ public class Parser {
     }
 
     private BaseExcel baseExcel = new BaseExcel(FILE_PATH).openFile();
+
+    public static void main(String[] args) {
+        List<ProductEx> productExes = new Main().retrieveAllProducts();
+
+    }
 
     public List<ProductEx> retrieveAllProducts() {
         List<ProductEx> products = baseExcel.unmarshal(ProductEx.class, SHEET1, 1);
