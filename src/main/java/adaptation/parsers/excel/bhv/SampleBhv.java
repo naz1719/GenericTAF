@@ -7,6 +7,9 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static definition.constants.CommonConsts.*;
 
 public class SampleBhv extends BaseBhv {
@@ -15,6 +18,7 @@ public class SampleBhv extends BaseBhv {
 
     private CellStyle headerStyle = CellStyleUtils.getCellSHeaderStyle(baseExcel);
 
+    public static List<String> SAMPLE_HEADERS = Arrays.asList("Header", "Header", "Header", "Header");
     private int BEGIN_ROW_CREATED_SHEET = 1;
 
 
