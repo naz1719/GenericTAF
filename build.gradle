@@ -18,16 +18,18 @@ repositories {
     maven { url "http://repo.maven.apache.org/maven2" }
 }
 dependencies {
+    compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4' // jdbc
     compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.9'
     compile group: 'com.github.windriverteam', name: 'windriver-java', version: '0.1.0'
     compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
     compile group: 'org.apache.poi', name: 'poi', version: '3.17'
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.5.3'
-    testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
-    compile group: 'io.qameta.allure', name: 'allure-testng', version: allure_version
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
+    compile group: 'org.testng', name: 'testng', version: '6.14.3'
     compile group: 'com.opencsv', name: 'opencsv', version: '4.2'
+    compile group: 'io.qameta.allure', name: 'allure-testng', version: allure_version
+    compile group: 'io.qameta.allure', name: 'allure-rest-assured', version: '2.7.0'
     compile group: 'com.jayway.restassured', name: 'rest-assured', version: '2.9.0'
 }
 

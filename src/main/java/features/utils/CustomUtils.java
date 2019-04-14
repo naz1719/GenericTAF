@@ -168,15 +168,6 @@ public class CustomUtils {
     }
 
 
-    public static XMLGregorianCalendar getCurrentData(String pattern) throws DatatypeConfigurationException {
-        Date date = new Date();
-        Date newDate;
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        newDate = c.getTime();
-        return DatatypeFactory.newInstance().newXMLGregorianCalendar(new SimpleDateFormat(pattern).format(newDate));
-    }
-
 
 }
 

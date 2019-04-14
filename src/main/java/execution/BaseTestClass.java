@@ -1,11 +1,11 @@
 package execution;
 
-import definition.constants.CommonConsts;
 import adaptation.ui.driver.WebDriverManager;
 import adaptation.ui.injector.Injector;
+import definition.constants.CommonConsts;
 import execution.logger.TestListener;
 import execution.logger.TestLogger;
-import features.propertyLoader.PropertiesLoader;
+import features.env.EnvInitializer;
 import features.wait.WaitManager;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
@@ -20,25 +20,19 @@ public abstract class BaseTestClass {
 
     protected WaitManager waitManager = new WaitManager();
 
-    protected PropertiesLoader propertiesLoader = new PropertiesLoader(CommonConsts.PATH_TO_CONFIGURATION_PROPERTIES);
-
     protected TestLogger LOG;
 
     @BeforeSuite(alwaysRun = true)
     public void configureEnvProperties(ITestContext iTestContext) throws Exception {
         String country = iTestContext.getSuite().getParameter("country");
-//        try {
-//            //must be done only once (not in each suite)
-//            EnvInitializer.initEnvProperties();
-//
-//        } catch (Throwable e) {
-//            throw new RuntimeException(e);
-//        }
-    }
-
-    @BeforeClass
-    public void browserInstantiate() {
         System.setProperty(CommonConsts.ESCAPE_PROPERTY, "false");
+        try {
+            //must be done only once (not in each suite)
+            EnvInitializer.initEnvProperties();
+
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void step(String message) {

@@ -1,22 +1,22 @@
 package execution.logger;
 
-import definition.constants.CommonConsts;
-import features.propertyLoader.PropertiesLoader;
+import features.env.general.GeneralPropNames;
+import features.env.general.GeneralProperties;
 import io.qameta.allure.Step;
 import org.apache.log4j.*;
 
 public class TestLogger {
+    public static final String LOG_LEVEL = GeneralProperties.getGeneralCommonProperty(GeneralPropNames.log_level_type);
     private static TestLogger logger;
     private Logger LOG;
-    private PropertiesLoader propertiesLoader = new PropertiesLoader(CommonConsts.PATH_TO_CONFIGURATION_PROPERTIES);
 
     private TestLogger(String testName, String className) {
         LOG = Logger.getLogger(testName);
-        LOG.setLevel(Level.toLevel(propertiesLoader.getLogType()));
+        LOG.setLevel(Level.toLevel(LOG_LEVEL));
         BasicConfigurator.resetConfiguration();
 
         FileAppender fileAppender = new FileAppender();
-        String fileName =String.format(TestListener.LOG_OUTPUT_PATH, System.getProperty("user.dir"), className, testName);
+        String fileName = String.format(TestListener.LOG_OUTPUT_PATH, System.getProperty("user.dir"), className, testName);
         fileAppender.setFile(fileName);
         fileAppender.setLayout(new PatternLayout("[%-5p] %d{HH:mm:ss} %c: %m%n"));
         fileAppender.setAppend(false);
@@ -61,7 +61,7 @@ public class TestLogger {
     }
 
     public void drop() {
-        if(logger != null)
-        logger = null;
+        if (logger != null)
+            logger = null;
     }
 }

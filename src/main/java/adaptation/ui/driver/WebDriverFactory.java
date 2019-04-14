@@ -1,17 +1,13 @@
 package adaptation.ui.driver;
 
-import definition.constants.CommonConsts;
-import features.propertyLoader.PropertiesLoader;
-import org.openqa.selenium.UnexpectedAlertBehaviour;
+import features.env.general.GeneralPropNames;
+import features.env.general.GeneralProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -19,17 +15,20 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import static adaptation.ui.driver.Drivers.*;
+
 
 public class WebDriverFactory {
 
-    protected PropertiesLoader propertiesLoader = new PropertiesLoader(CommonConsts.PATH_TO_CONFIGURATION_PROPERTIES);
+    protected String BROWSER_NAME = GeneralProperties.getGeneralCommonProperty(GeneralPropNames.browser);
+    protected String IMPLICITLY_WAIT_TIMEOUT = GeneralProperties.getGeneralCommonProperty(GeneralPropNames.implicitly_wait_timeout);
 
 
     public WebDriver getDriverInstance() {
-        Drivers driverType = Drivers.getDriverType(propertiesLoader.getBrowserName());
-        String hubURLSystemProperty = propertiesLoader.getHubURLSystemProperty();
+        Drivers driverType = Drivers.getDriverType(BROWSER_NAME);
+        String hubURLSystemProperty = GeneralProperties.getGeneralCommonProperty(GeneralPropNames.hub_URL);
 
-        if (hubURLSystemProperty != null && !hubURLSystemProperty.isEmpty()) {
+        if (!hubURLSystemProperty.equalsIgnoreCase("_hubURL_") && !hubURLSystemProperty.isEmpty()) {
             driverType = Drivers.REMOTE_WEB_DRIVER;
         }
 
@@ -39,51 +38,41 @@ public class WebDriverFactory {
     private WebDriver getDriverInstance(Drivers driverType) {
 
         switch (driverType) {
-
             case CHROME:
-                System.setProperty("webdriver.chrome.driver",
-                        propertiesLoader.getChromeDriverPath());
-                WebDriver chrome = new ChromeDriver(getChromeCapabilities());
-                chrome.manage().timeouts().implicitlyWait(propertiesLoader.getImplicitlyWaitTimeout(), TimeUnit.SECONDS);
+                System.setProperty(CHROME.getProperty(), CHROME.getDriverPath());
+                WebDriver chrome = new ChromeDriver(CHROME.getDesiredCapabilities());
+                chrome.manage().timeouts().implicitlyWait(Long.parseLong(IMPLICITLY_WAIT_TIMEOUT), TimeUnit.SECONDS);
                 return chrome;
-
             case IE:
-                System.setProperty("webdriver.ie.driver",
-                        propertiesLoader.getInternetExplorerDriver_32Path());
-                WebDriver ieDriver = new InternetExplorerDriver(getInternetExplorerCapabilities());
-                ieDriver.manage().timeouts().implicitlyWait(propertiesLoader.getImplicitlyWaitTimeout(), TimeUnit.SECONDS);
+                System.setProperty(IE.getProperty(), IE.getDriverPath());
+                WebDriver ieDriver = new InternetExplorerDriver(IE.getDesiredCapabilities());
+                ieDriver.manage().timeouts().implicitlyWait(Long.parseLong(IMPLICITLY_WAIT_TIMEOUT), TimeUnit.SECONDS);
                 ieDriver.manage().window().maximize();
                 return ieDriver;
-
             case FIREFOX:
-                System.setProperty("webdriver.gecko.driver", propertiesLoader.getFirefoxDriverPath());
-                WebDriver firefoxDriver = new FirefoxDriver(getFirefoxCapabilities());
-                firefoxDriver.manage().timeouts().implicitlyWait(propertiesLoader.getImplicitlyWaitTimeout(), TimeUnit.SECONDS);
+                System.setProperty(FIREFOX.getProperty(), FIREFOX.getDriverPath());
+                WebDriver firefoxDriver = new FirefoxDriver(FIREFOX.getDesiredCapabilities());
+                firefoxDriver.manage().timeouts().implicitlyWait(Long.parseLong(IMPLICITLY_WAIT_TIMEOUT), TimeUnit.SECONDS);
                 return firefoxDriver;
             case HTML_UNIT_DRIVER:
                 HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver();
                 htmlUnitDriver.setJavascriptEnabled(true);
                 return htmlUnitDriver;
-
             case GHOST_DRIVER:
-                DesiredCapabilities DesireCaps = new DesiredCapabilities();
-//                DesireCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, propertiesLoader.getGhostDriverPath());
-                System.setProperty("phantomjs.binary.path", propertiesLoader.getGhostDriverPath());
-
+                DesiredCapabilities desireCaps = new DesiredCapabilities();
+                System.setProperty(GHOST_DRIVER.getProperty(), GHOST_DRIVER.getDriverPath());
                 WebDriver ghostDriver = new PhantomJSDriver();
                 return ghostDriver;
-
             case REMOTE_WEB_DRIVER:
-                WebDriver driver = null;
-                URL url = null;
+                WebDriver driver;
+                URL hubUrl;
                 try {
-                    String hubURL = propertiesLoader.getHubURLSystemProperty();
-                    url = new URL(hubURL);
+                    hubUrl = new URL(Drivers.REMOTE_WEB_DRIVER.getDriverPath());
                 } catch (MalformedURLException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
-                driver = new RemoteWebDriver(url, getChromeCapabilities());
-                driver.manage().timeouts().implicitlyWait(propertiesLoader.getImplicitlyWaitTimeout(), TimeUnit.SECONDS);
+                driver = new RemoteWebDriver(hubUrl, CHROME.getDesiredCapabilities());
+                driver.manage().timeouts().implicitlyWait(Long.parseLong(IMPLICITLY_WAIT_TIMEOUT), TimeUnit.SECONDS);
                 driver.manage().window().maximize();
                 return driver;
             default:
@@ -91,32 +80,5 @@ public class WebDriverFactory {
         }
     }
 
-    private DesiredCapabilities getChromeCapabilities() {
-        DesiredCapabilities chromeCapabilities = DesiredCapabilities.chrome();
-        chromeCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-        chromeCapabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR,
-                UnexpectedAlertBehaviour.ACCEPT);
-        chromeCapabilities.setCapability("browserConnectionEnabled", true);
 
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--no-sandbox");
-        chromeCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-        return chromeCapabilities;
-    }
-
-    private DesiredCapabilities getFirefoxCapabilities() {
-        DesiredCapabilities firefoxCapabilities = DesiredCapabilities.firefox();
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxCapabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, firefoxOptions);
-        return firefoxCapabilities;
-    }
-
-    private DesiredCapabilities getInternetExplorerCapabilities() {
-        DesiredCapabilities internetExplorerCapabilities = DesiredCapabilities.internetExplorer();
-        internetExplorerCapabilities.setCapability("webdriver.ie.version", "11");
-        internetExplorerCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-        internetExplorerCapabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
-        internetExplorerCapabilities.setCapability("ignoreProtectedModeSettings", true);
-        return internetExplorerCapabilities;
-    }
 }
