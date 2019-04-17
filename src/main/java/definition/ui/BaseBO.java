@@ -1,11 +1,11 @@
 package definition.ui;
 
 import execution.logger.TestLogger;
-import features.wait.WaitManager;
+import features.wait.UIWaitManager;
 import adaptation.ui.driver.WebDriverManager;
 
 public abstract class BaseBO {
-    protected WaitManager waitManager = new WaitManager();
+    protected UIWaitManager waitManager = new UIWaitManager();
     protected TestLogger LOG = TestLogger.getLogger();
     private BasePO basePO;
 

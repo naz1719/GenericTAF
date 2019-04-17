@@ -1,11 +1,11 @@
 package tests;
 
 import adaptation.ui.driver.WebDriverManager;
-import definition.ui.bo.FrontBO;
 import adaptation.ui.injector.Injector;
+import definition.ui.bo.FrontBO;
 import execution.BaseTestClass;
 import features.SuiteParam;
-import features.wait.WaitManager;
+import features.wait.DelaySteps;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.ITestContext;
@@ -29,7 +29,7 @@ public class LoginCheckTest extends BaseTestClass {
         webElement.sendKeys("Hey " +country);
         webElement.submit();
 
-        WaitManager.sleepTimeOut(4000);
+        DelaySteps.getInstance().delayStep(4);
 
 //        frontBO
 //                .clickOnBuildingBlocks();

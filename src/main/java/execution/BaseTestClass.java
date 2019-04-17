@@ -6,7 +6,7 @@ import definition.constants.CommonConsts;
 import execution.logger.TestListener;
 import execution.logger.TestLogger;
 import features.env.EnvInitializer;
-import features.wait.WaitManager;
+import features.wait.UIWaitManager;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
 @Listeners(TestListener.class)
 public abstract class BaseTestClass {
 
-    protected WaitManager waitManager = new WaitManager();
+    protected UIWaitManager waitManager = new UIWaitManager();
 
     protected TestLogger LOG;
 

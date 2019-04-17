@@ -1,12 +1,12 @@
 package definition.ui;
 
 import execution.logger.TestLogger;
-import features.wait.WaitManager;
+import features.wait.UIWaitManager;
 import adaptation.ui.driver.WebDriverManager;
 import org.openqa.selenium.support.PageFactory;
 
 public class BasePO {
-    protected WaitManager waitManager = new WaitManager();
+    protected UIWaitManager waitManager = new UIWaitManager();
     protected TestLogger LOG = TestLogger.getLogger();
 
     public BasePO() {

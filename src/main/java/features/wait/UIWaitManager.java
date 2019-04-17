@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 import static adaptation.ui.driver.WebDriverManager.getDriver;
 
 
-public class WaitManager {
+public class UIWaitManager {
     public static final int DEFAULT_TIME_OUT = 60;// Seconds
     private static final long DEFAULT_POLLING = 1L;
     private static final TimeUnit DEFAULT_TIME_UNIT = TimeUnit.SECONDS;
@@ -21,7 +21,7 @@ public class WaitManager {
     private static final String ERROR_WAITING = "Some problem occurs during waiting";
     private static final int COUNT_RETRY = 5;
     private static final int DURATION = 3;
-    private static final Logger LOG = Logger.getLogger(WaitManager.class);
+    private static final Logger LOG = Logger.getLogger(UIWaitManager.class);
     private long timeOut;
     private TimeUnit timeUnitForTimeOut;
     private long polling;
@@ -30,14 +30,14 @@ public class WaitManager {
     private static final int COUNT_RETRY_INCYCLE = 50;
     private static final int RETRY_CYCLE_SLEEP = 500;
 
-    public WaitManager(int timeOut, TimeUnit unit) {
+    public UIWaitManager(int timeOut, TimeUnit unit) {
         this.timeOut = timeOut;
         this.timeUnitForTimeOut = unit;
         this.polling = DEFAULT_POLLING;
         this.timeUnitForPolling = DEFAULT_TIME_UNIT;
     }
 
-    public WaitManager() {
+    public UIWaitManager() {
         this.timeOut = DEFAULT_TIME_OUT;
         this.timeUnitForTimeOut = DEFAULT_TIME_UNIT;
         this.polling = DEFAULT_POLLING;
