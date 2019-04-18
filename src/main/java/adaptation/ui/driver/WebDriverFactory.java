@@ -1,6 +1,6 @@
 package adaptation.ui.driver;
 
-import features.env.general.GeneralPropNames;
+import features.env.properties.GeneralPropNames;
 import features.env.general.GeneralProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

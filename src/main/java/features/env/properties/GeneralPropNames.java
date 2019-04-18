@@ -1,4 +1,4 @@
-package features.env.general;
+package features.env.properties;
 
 public enum GeneralPropNames {
 

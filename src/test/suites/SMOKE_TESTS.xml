@@ -5,7 +5,8 @@
     <parameter name="country" value="DE"/>
     <test name="Main test">
         <classes>
-            <class name="tests.LoginCheckTest"/> <!-- For ALL country -->
+            <!--<class name="tests.ui.LoginCheckTest"/> &lt;!&ndash; For ALL country &ndash;&gt;-->
+            <class name="tests.rest.DateTimeTest"/> <!-- For ALL country -->
         </classes>
     </test>
 </suite>

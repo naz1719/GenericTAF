@@ -1,6 +1,6 @@
 package execution.logger;
 
-import features.env.general.GeneralPropNames;
+import features.env.properties.GeneralPropNames;
 import features.env.general.GeneralProperties;
 import io.qameta.allure.Step;
 import org.apache.log4j.*;

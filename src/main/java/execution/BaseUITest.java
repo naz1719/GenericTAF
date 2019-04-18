@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
 
 
 @Listeners(TestListener.class)
-public abstract class BaseTestClass {
+public abstract class BaseUITest {
 
     protected UIWaitManager waitManager = new UIWaitManager();
 
@@ -33,10 +33,6 @@ public abstract class BaseTestClass {
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void step(String message) {
-        LOG.info(message);
     }
 
 

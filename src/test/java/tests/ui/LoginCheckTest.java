@@ -1,9 +1,9 @@
-package tests;
+package tests.ui;
 
 import adaptation.ui.driver.WebDriverManager;
 import adaptation.ui.injector.Injector;
 import definition.ui.bo.FrontBO;
-import execution.BaseTestClass;
+import execution.BaseUITest;
 import features.SuiteParam;
 import features.wait.DelaySteps;
 import org.openqa.selenium.By;
@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 import static definition.constants.CommonConsts.WEB_SITE_URL;
 
-public class LoginCheckTest extends BaseTestClass {
+public class LoginCheckTest extends BaseUITest {
 
     @Injector
     private FrontBO frontBO;

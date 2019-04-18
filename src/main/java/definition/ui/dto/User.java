@@ -1,4 +1,4 @@
-package definition.ui.model;
+package definition.ui.dto;
 
 public class User {
     private String login;
