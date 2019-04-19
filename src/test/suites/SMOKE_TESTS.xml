@@ -1,12 +1,14 @@
-<suite name="Omnichannel DE regression suite"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Regression tests"
        parallel="instances"
        thread-count="4"
        data-provider-thread-count="2">
-    <parameter name="country" value="DE"/>
-    <test name="Main test">
+    <test name="Google Search Test">
         <classes>
-            <!--<class name="tests.ui.LoginCheckTest"/> &lt;!&ndash; For ALL country &ndash;&gt;-->
-            <class name="tests.rest.DateTimeTest"/> <!-- For ALL country -->
+            <class name="tests.LoginCheckTest"/>
+            <class name="tests.DateTimeTest"/>
         </classes>
     </test>
 </suite>
