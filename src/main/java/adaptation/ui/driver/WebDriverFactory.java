@@ -1,14 +1,11 @@
 package adaptation.ui.driver;
 
-import features.env.properties.GeneralPropNames;
 import features.env.general.GeneralProperties;
+import features.env.properties.GeneralPropNames;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
@@ -54,15 +51,15 @@ public class WebDriverFactory {
                 WebDriver firefoxDriver = new FirefoxDriver(FIREFOX.getDesiredCapabilities());
                 firefoxDriver.manage().timeouts().implicitlyWait(Long.parseLong(IMPLICITLY_WAIT_TIMEOUT), TimeUnit.SECONDS);
                 return firefoxDriver;
-            case HTML_UNIT_DRIVER:
-                HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver();
-                htmlUnitDriver.setJavascriptEnabled(true);
-                return htmlUnitDriver;
-            case GHOST_DRIVER:
-                DesiredCapabilities desireCaps = new DesiredCapabilities();
-                System.setProperty(GHOST_DRIVER.getProperty(), GHOST_DRIVER.getDriverPath());
-                WebDriver ghostDriver = new PhantomJSDriver();
-                return ghostDriver;
+//            case HTML_UNIT_DRIVER:
+//                HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver();
+//                htmlUnitDriver.setJavascriptEnabled(true);
+//                return htmlUnitDriver;
+//            case GHOST_DRIVER:
+//                DesiredCapabilities desireCaps = new DesiredCapabilities();
+//                System.setProperty(GHOST_DRIVER.getProperty(), GHOST_DRIVER.getDriverPath());
+//                WebDriver ghostDriver = new PhantomJSDriver();
+//                return ghostDriver;
             case REMOTE_WEB_DRIVER:
                 WebDriver driver;
                 URL hubUrl;
