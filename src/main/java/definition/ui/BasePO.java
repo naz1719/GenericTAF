@@ -6,7 +6,7 @@ import adaptation.ui.driver.WebDriverManager;
 import org.openqa.selenium.support.PageFactory;
 
 public class BasePO {
-    protected UIWaitManager waitManager = new UIWaitManager();
+    protected UIWaitManager waitManager = UIWaitManager.getInstance();
     protected TestLogger LOG = TestLogger.getLogger();
 
     public BasePO() {

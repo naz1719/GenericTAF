@@ -1,9 +1,11 @@
 package features.wait;
 
-import adaptation.ui.elements.Element;
 import adaptation.ui.driver.WebDriverManager;
+import adaptation.ui.elements.Element;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.*;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.*;
 
 import java.util.NoSuchElementException;
@@ -14,6 +16,8 @@ import static adaptation.ui.driver.WebDriverManager.getDriver;
 
 
 public class UIWaitManager {
+    private static final UIWaitManager instance = new UIWaitManager();
+
     public static final int DEFAULT_TIME_OUT = 60;// Seconds
     private static final long DEFAULT_POLLING = 1L;
     private static final TimeUnit DEFAULT_TIME_UNIT = TimeUnit.SECONDS;
@@ -21,15 +25,13 @@ public class UIWaitManager {
     private static final String ERROR_WAITING = "Some problem occurs during waiting";
     private static final int COUNT_RETRY = 5;
     private static final int DURATION = 3;
-    private static final Logger LOG = Logger.getLogger(UIWaitManager.class);
+        private static final Logger LOG = Logger.getLogger(UIWaitManager.class);
+    private static final int COUNT_RETRY_INCYCLE = 50;
+    private static final int RETRY_CYCLE_SLEEP = 500;
     private long timeOut;
     private TimeUnit timeUnitForTimeOut;
     private long polling;
     private TimeUnit timeUnitForPolling;
-
-    private static final int COUNT_RETRY_INCYCLE = 50;
-    private static final int RETRY_CYCLE_SLEEP = 500;
-
     public UIWaitManager(int timeOut, TimeUnit unit) {
         this.timeOut = timeOut;
         this.timeUnitForTimeOut = unit;
@@ -37,11 +39,15 @@ public class UIWaitManager {
         this.timeUnitForPolling = DEFAULT_TIME_UNIT;
     }
 
-    public UIWaitManager() {
+    private UIWaitManager() {
         this.timeOut = DEFAULT_TIME_OUT;
         this.timeUnitForTimeOut = DEFAULT_TIME_UNIT;
         this.polling = DEFAULT_POLLING;
         this.timeUnitForPolling = DEFAULT_TIME_UNIT;
+    }
+
+    public static UIWaitManager getInstance() {
+        return instance;
     }
 
     //    WaitManager.waitForCondition(() -> isContainerVisible, false);
@@ -168,7 +174,7 @@ public class UIWaitManager {
         debug("Start of page waiter");
         boolean pageIsReady = false;
         boolean pageIsLoading = true;
-        for(int i = 0; i < COUNT_RETRY_INCYCLE; i++) {
+        for (int i = 0; i < COUNT_RETRY_INCYCLE; i++) {
             debug("\n waiting for all conditions. Count:" + i);
             for (int j = 0; j < COUNT_RETRY_INCYCLE; j++) {
                 debug("\n waiting till pageIsReady state true. Count:" + j);
@@ -193,13 +199,12 @@ public class UIWaitManager {
                     WebElement element = wait.until(driver -> webElement);
 
                     if (element != null) {
-                        try{
+                        try {
                             String statusValue = element.getAttribute("style");
                             if (statusValue.equalsIgnoreCase("display: none;"))
                                 pageIsLoading = false;
                             break;
-                        }
-                        catch (org.openqa.selenium.StaleElementReferenceException e){
+                        } catch (org.openqa.selenium.StaleElementReferenceException e) {
                             debug("spinner element was refreshed, page was overloaded.");
                             pageIsReady = false;
                             continue;
@@ -212,10 +217,10 @@ public class UIWaitManager {
                     }
                 }
             }
-            if(!pageIsLoading & pageIsReady)
+            if (!pageIsLoading & pageIsReady)
                 break;
         }
-        if(pageIsLoading || !pageIsReady){
+        if (pageIsLoading || !pageIsReady) {
             error("Page wasn't loaded successfully");
         }
         debug("End of page waiter");

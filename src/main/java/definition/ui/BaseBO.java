@@ -5,7 +5,7 @@ import features.wait.UIWaitManager;
 import adaptation.ui.driver.WebDriverManager;
 
 public abstract class BaseBO {
-    protected UIWaitManager waitManager = new UIWaitManager();
+    protected UIWaitManager waitManager = UIWaitManager.getInstance();
     protected TestLogger LOG = TestLogger.getLogger();
     private BasePO basePO;
 

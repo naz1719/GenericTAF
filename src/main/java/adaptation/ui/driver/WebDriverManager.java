@@ -9,6 +9,7 @@ import org.testng.Reporter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 public class WebDriverManager {
 
@@ -31,21 +32,26 @@ public class WebDriverManager {
     }
 
     public static void stop() {
-        WebDriver driver = getDriver();
-        LOG.info("Stopping browser.");
-        try {
-            for (String handle : driver.getWindowHandles()) {
-                driver.switchTo().window(handle);
-                driver.close();
+        Optional<WebDriver> webDriver = Optional.ofNullable(getDriver());
+        if (webDriver.isPresent()) {
+            WebDriver driver = webDriver.get();
+            LOG.info("Stopping browser.");
+            try {
+                for (String handle : driver.getWindowHandles()) {
+                    driver.switchTo().window(handle);
+                    driver.close();
+                }
+                driver.quit();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                removeDriverFromDriverPool();
             }
-            driver.quit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            removeDriverFromDriverPool();
-        }
 
-        LOG.info("Browser has been stopped.");
+            LOG.info("Browser has been stopped.");
+        }else {
+            LOG.info("All browsers have been stopped.");
+        }
     }
 
     public static void load(String path) {
