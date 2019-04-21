@@ -1,10 +1,13 @@
 package execution;
 
 import adaptation.ui.driver.WebDriverManager;
-import adaptation.ui.injector.InjectorBhv;
+import execution.injector.Injector;
 import features.wait.UIWaitManager;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 
 
 public abstract class BaseUITest extends BaseTest{
@@ -12,8 +15,10 @@ public abstract class BaseUITest extends BaseTest{
 
     @BeforeMethod
     public void injectFields() {
-        InjectorBhv.getInstance().createInstance();
+        createInstance(this.getClass());
     }
+
+
 
     @AfterMethod
     public void dropDriver() {
@@ -32,4 +37,22 @@ public abstract class BaseUITest extends BaseTest{
 
 
 
+    public void createInstance(Class<? extends BaseUITest> clazz) {
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field field : fields) {
+            Annotation[] annotations = field.getAnnotations();
+            for (Annotation annotation : annotations) {
+                if (annotation instanceof Injector) {
+                    try {
+                        LOG.debug("Trying to create instance " + field.getType());
+                        Object object = field.getType().newInstance();
+                        field.setAccessible(true);
+                        field.set(this, object);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
 }

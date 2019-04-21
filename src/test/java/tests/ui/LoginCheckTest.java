@@ -1,7 +1,7 @@
 package tests.ui;
 
 import adaptation.ui.driver.WebDriverManager;
-import adaptation.ui.injector.Injector;
+import execution.injector.Injector;
 import definition.ui.bo.FrontBO;
 import execution.BaseUITest;
 import features.SuiteParam;
@@ -21,7 +21,6 @@ public class LoginCheckTest extends BaseUITest {
     @Test
     public void testGoogleSearch(ITestContext context) throws InterruptedException {
         String country = context.getSuite().getParameter(SuiteParam.country.name());
-
 
         frontBO.openPortal(WEB_SITE_URL);
         WebElement webElement = WebDriverManager.getDriver().findElement(By.name("q"));
