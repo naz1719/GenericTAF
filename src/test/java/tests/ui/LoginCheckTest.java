@@ -1,4 +1,4 @@
-package tests;
+package tests.ui;
 
 import adaptation.ui.driver.WebDriverManager;
 import adaptation.ui.injector.Injector;
