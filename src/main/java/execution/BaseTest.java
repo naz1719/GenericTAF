@@ -27,7 +27,7 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public void injectFields(Method method) {
+    public void initLogger(Method method) {
         LOG = TestLogger.getLogger(method.getName(), method.getDeclaringClass().getSimpleName());
     }
 
