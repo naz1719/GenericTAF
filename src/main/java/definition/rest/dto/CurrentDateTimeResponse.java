@@ -32,7 +32,7 @@ public class CurrentDateTimeResponse {
     @JsonProperty("timeZoneName")
     private String timeZoneName;
     @JsonProperty("currentFileTime")
-    private Integer currentFileTime;
+    private Long currentFileTime;
     @JsonProperty("ordinalDate")
     private String ordinalDate;
     @JsonProperty("serviceResponse")
@@ -99,12 +99,12 @@ public class CurrentDateTimeResponse {
     }
 
     @JsonProperty("currentFileTime")
-    public Integer getCurrentFileTime() {
+    public Long getCurrentFileTime() {
         return currentFileTime;
     }
 
     @JsonProperty("currentFileTime")
-    public void setCurrentFileTime(Integer currentFileTime) {
+    public void setCurrentFileTime(Long currentFileTime) {
         this.currentFileTime = currentFileTime;
     }
 
