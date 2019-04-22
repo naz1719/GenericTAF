@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Regression tests"
-       parallel="instances"
+       parallel="classes"
        thread-count="4"
        data-provider-thread-count="2">
     <test name="Google Search Test">
