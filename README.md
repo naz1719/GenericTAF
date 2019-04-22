@@ -2,19 +2,13 @@
 # UI and APU gTAA (Generic test automation architecture)
 
 ### Run
-mvn -Dtest=tests.ui.LoginCheckTest#openUrlTest test
+gradle test
 
-### Allure Report
- 1. allure generate xml report to target//allure-results	
- 2. reportSurfire we use to set folder for results.
- 3. We use allure-maven to generate html file with reports.
-
-Commands:
-  * gradle test  // run tests
+Debug mode
+gradle test -Dorg.gradle.debug=true
 
  ## Prerequisites
  * Java 1.8
- * Maven >=3.3.9
   
 ## Built With
   * [Selenium WebDriver](http://www.seleniumhq.org/docs/03_webdriver.jsp) - Selenium is a suite of tools to automate web browsers across many platforms. 
