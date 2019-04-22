@@ -12,7 +12,7 @@ import org.testng.annotations.Listeners;
 
 import java.lang.reflect.Method;
 
-//@Listeners(TestListener.class)
+@Listeners(TestListener.class)
 public class BaseTest {
     protected TestLogger LOG;
 

@@ -18,8 +18,6 @@ public abstract class BaseUITest extends BaseTest{
         createInstance(this.getClass());
     }
 
-
-
     @AfterMethod
     public void dropDriver() {
         WebDriverManager.stop();
