@@ -1,6 +1,6 @@
 package tests.rest;
 
-import com.jayway.restassured.response.Response;
+import definition.rest.dto.CurrentDateTimeResponse;
 import definition.rest.service.GetTimeService;
 import execution.BaseAPITest;
 import features.SuiteParam;
@@ -13,7 +13,7 @@ public class DateTimeTest extends BaseAPITest {
     public void checkCurrentDateTimeTest(ITestContext context) {
         String country = context.getSuite().getParameter(SuiteParam.country.name());
 
-        Response currentDateTimeResponse = GetTimeService.getInstance().getCurrentTime();
+        CurrentDateTimeResponse currentDateTimeResponse = GetTimeService.getInstance().getCurrentTime();
 //        AllureLogger.logInfo("Current time : [" + currentDateTimeResponse + "]");
     }
 }

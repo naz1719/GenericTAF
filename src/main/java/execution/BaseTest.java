@@ -1,18 +1,11 @@
 package execution;
 
 import definition.constants.CommonConsts;
-import execution.logger.TestListener;
 import execution.logger.TestLogger;
 import features.env.EnvInitializer;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Listeners;
 
-import java.lang.reflect.Method;
-
-@Listeners(TestListener.class)
 public class BaseTest {
     protected TestLogger LOG;
 
@@ -29,15 +22,15 @@ public class BaseTest {
         }
     }
 
-    @BeforeMethod
-    public void initLogger(Method method) {
-            LOG = TestLogger.getLogger(method.getName(), method.getDeclaringClass().getSimpleName());
-    }
-
-    @AfterMethod
-    public void dropLogger() {
-        LOG.drop();
-    }
+//    @BeforeMethod
+//    public void initLogger(Method method) {
+//            LOG = TestLogger.getLogger(method.getName(), method.getDeclaringClass().getSimpleName());
+//    }
+//
+//    @AfterMethod
+//    public void dropLogger() {
+//        LOG.drop();
+//    }
 
 
 }

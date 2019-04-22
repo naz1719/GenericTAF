@@ -3,6 +3,7 @@ package definition.rest.service;
 import com.jayway.restassured.filter.log.LogDetail;
 import com.jayway.restassured.filter.log.RequestLoggingFilter;
 import com.jayway.restassured.filter.log.ResponseLoggingFilter;
+import com.jayway.restassured.internal.mapper.ObjectMapperType;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import definition.rest.BaseService;
@@ -29,7 +30,7 @@ public class GetTimeService extends BaseService {
     }
 
     @Step(value = "REST: Get current time")
-    public Response getCurrentTime() {
+    public CurrentDateTimeResponse getCurrentTime() {
         LogHolder logHolder = new LogHolder();
         Response response;
         CurrentDateTimeResponse timeResponse;
@@ -52,12 +53,12 @@ public class GetTimeService extends BaseService {
             validateResponseBasic(response);
             validateResponseStatusCode(response, 200);
 
-//            timeResponse = response.then().extract().as(CurrentDateTimeResponse.class, ObjectMapperType.JACKSON_2);
+            timeResponse = response.then().extract().as(CurrentDateTimeResponse.class, ObjectMapperType.JACKSON_2);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        return response;
+        return timeResponse;
     }
 
 

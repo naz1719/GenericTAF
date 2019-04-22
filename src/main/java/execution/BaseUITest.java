@@ -2,14 +2,17 @@ package execution;
 
 import adaptation.ui.driver.WebDriverManager;
 import execution.injector.Injector;
+import execution.logger.UITestListener;
 import features.wait.UIWaitManager;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 
+@Listeners(UITestListener.class)
 public abstract class BaseUITest extends BaseTest{
     protected UIWaitManager waitManager = UIWaitManager.getInstance();
 

@@ -6,7 +6,7 @@ import org.testng.ITestResult;
 
 import java.io.File;
 
-public class TestListener implements ITestListener {
+public class UITestListener implements ITestListener {
     public static final String LOG_OUTPUT_PATH = "%s/output/logs/%s/%s.log";
 
     private TestLogger LOG;
