@@ -1,12 +1,12 @@
 package execution.logger;
 
-import features.env.properties.GeneralPropNames;
-import features.env.general.GeneralProperties;
+import features.properties.EnvInitializer;
+import features.properties.enums.GeneralPropNames;
 import io.qameta.allure.Step;
 import org.apache.log4j.*;
 
 public class TestLogger {
-    public static final String LOG_LEVEL = GeneralProperties.getGeneralCommonProperty(GeneralPropNames.log_level_type);
+    public static final String LOG_LEVEL = EnvInitializer.getProperty(GeneralPropNames.LOG_LEVEL_TYPE.getValue());
     private static TestLogger logger;
     private Logger LOG;
 

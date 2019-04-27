@@ -1,4 +1,4 @@
-package features.env;
+package features.properties.enums;
 
 public enum EndpointPropNames {
 

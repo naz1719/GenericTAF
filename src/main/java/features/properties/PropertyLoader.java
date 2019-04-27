@@ -1,12 +1,40 @@
-package features.env;
+package features.properties;
 
+import features.utils.CustomUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
 import java.util.Map;
 import java.util.Properties;
 
 public class PropertyLoader {
+
+
+    public static Properties loadProperties(String filename) {
+        try (InputStream in = ClassLoader.getSystemClassLoader().getResourceAsStream(filename)) {
+            Properties properties = new Properties();
+            properties.load(in);
+            return properties;
+        } catch (IOException e) {
+            String error = "Can't load properties file [" + filename + "]";
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    public static String getProperty(String key, Properties properties) {
+        String propertyName = System.getenv(key);
+        if (StringUtils.isBlank(propertyName)) {
+            String propertyValue = properties.getProperty(key);
+            if (propertyValue == null) {
+                String error = "Can't get property value [" + propertyName + "] Check if this property exists in file.";
+                throw new RuntimeException(error);
+            }
+            return propertyValue;
+        }
+        return propertyName;
+    }
+
 
     /**
      * Method for get property value from file in classpath.
@@ -15,6 +43,7 @@ public class PropertyLoader {
      * @param propertyName     property name in file
      * @return property value
      */
+    @Deprecated
     public static String getSystemPropertyValue(String propertyFilePath, String propertyName) {
         String propertyValue = "";
         InputStream inputStream = null;
@@ -37,7 +66,6 @@ public class PropertyLoader {
         return propertyValue;
     }
 
-
     /**
      * Method for get property value from file in classpath.
      *
@@ -45,6 +73,7 @@ public class PropertyLoader {
      * @param propertyName     property name in file
      * @return property value
      */
+    @Deprecated
     public static String getClasspathPropertyValue(String propertyFilePath, String propertyName) {
         String propertyValue = "";
         Properties properties = new Properties();
@@ -76,6 +105,7 @@ public class PropertyLoader {
      * @param propertiesPath file path for properties
      * @param properties     properties collection
      */
+    @Deprecated
     public static void writeProperties(String propertiesPath, Map<String, String> properties) {
         if (propertiesPath == null || "".equals(propertiesPath) || properties == null || properties.size() == 0) {
             String error = "Can't write properties to file cause parameters are not valid. File path is [" + propertiesPath + "] properties map is [" + properties + "].";

@@ -10,7 +10,7 @@ import definition.rest.BaseService;
 import definition.rest.dto.CurrentDateTimeResponse;
 import execution.logger.AllureLogger;
 import execution.logger.LogHolder;
-import features.env.EndpointPropNames;
+import features.properties.enums.EndpointPropNames;
 import io.qameta.allure.Step;
 
 import static com.jayway.restassured.RestAssured.given;

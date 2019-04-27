@@ -5,17 +5,17 @@ import adaptation.parsers.excel.core.BaseExcel;
 import adaptation.parsers.excel.model.excel.ExcelModelTitleProcessor;
 import adaptation.parsers.excel.model.excel.ProductEx;
 import adaptation.parsers.excel.model.payloads.ProductList;
+import adaptation.parsers.file.FileUtilsWrapper;
 
 import java.util.List;
 
-import static adaptation.parsers.file.FileUtilsWrapper.getExcel;
 import static definition.constants.CommonConsts.*;
 
 public class Main {
 
     static {
-//        copyFileUsingApacheCommonsIO(getExcel(), OUTPUT_DIRECTORY);
-        FILE_PATH = OUTPUT_DIRECTORY + "\\" + getExcel();
+//        copyFile(getExcelList(), OUTPUT_DIRECTORY);
+        FILE_PATH = OUTPUT_DIRECTORY + "\\" + FileUtilsWrapper.getExcelList().get(0);
     }
 
     private BaseExcel baseExcel = new BaseExcel(FILE_PATH).openFile();

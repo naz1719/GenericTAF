@@ -1,4 +1,4 @@
-package features.env;
+package features.properties.envTypes;
 
 public class EnvUtil {
     public static final String ENV_TYPE = checkEnvType(System.getProperty("envType")).toLowerCase();

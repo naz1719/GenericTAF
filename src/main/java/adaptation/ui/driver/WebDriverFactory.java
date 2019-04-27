@@ -1,7 +1,7 @@
 package adaptation.ui.driver;
 
-import features.env.general.GeneralProperties;
-import features.env.properties.GeneralPropNames;
+import features.properties.EnvInitializer;
+import features.properties.enums.GeneralPropNames;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -17,13 +17,13 @@ import static adaptation.ui.driver.Drivers.*;
 
 public class WebDriverFactory {
 
-    protected String BROWSER_NAME = GeneralProperties.getGeneralCommonProperty(GeneralPropNames.browser);
-    protected String IMPLICITLY_WAIT_TIMEOUT = GeneralProperties.getGeneralCommonProperty(GeneralPropNames.implicitly_wait_timeout);
+    protected String browser = EnvInitializer.getProperty(GeneralPropNames.BROWSER.getValue());
+    protected Long implicitlyWaitTimeout = Long.parseLong(EnvInitializer.getProperty(GeneralPropNames.IMPLICITLY_WAIT_TIMEOUT.getValue()));
 
 
     public WebDriver getDriverInstance() {
-        Drivers driverType = Drivers.getDriverType(BROWSER_NAME);
-        String hubURLSystemProperty = GeneralProperties.getGeneralCommonProperty(GeneralPropNames.hub_URL);
+        Drivers driverType = Drivers.getDriverType(browser);
+        String hubURLSystemProperty = EnvInitializer.getProperty(GeneralPropNames.HUB_URL.getValue());
 
         if (!hubURLSystemProperty.equalsIgnoreCase("_hubURL_") && !hubURLSystemProperty.isEmpty()) {
             driverType = Drivers.REMOTE_WEB_DRIVER;
@@ -38,18 +38,18 @@ public class WebDriverFactory {
             case CHROME:
                 System.setProperty(CHROME.getProperty(), CHROME.getDriverPath());
                 WebDriver chrome = new ChromeDriver(CHROME.getDesiredCapabilities());
-                chrome.manage().timeouts().implicitlyWait(Long.parseLong(IMPLICITLY_WAIT_TIMEOUT), TimeUnit.SECONDS);
+                chrome.manage().timeouts().implicitlyWait(implicitlyWaitTimeout, TimeUnit.SECONDS);
                 return chrome;
             case IE:
                 System.setProperty(IE.getProperty(), IE.getDriverPath());
                 WebDriver ieDriver = new InternetExplorerDriver(IE.getDesiredCapabilities());
-                ieDriver.manage().timeouts().implicitlyWait(Long.parseLong(IMPLICITLY_WAIT_TIMEOUT), TimeUnit.SECONDS);
+                ieDriver.manage().timeouts().implicitlyWait(implicitlyWaitTimeout, TimeUnit.SECONDS);
                 ieDriver.manage().window().maximize();
                 return ieDriver;
             case FIREFOX:
                 System.setProperty(FIREFOX.getProperty(), FIREFOX.getDriverPath());
                 WebDriver firefoxDriver = new FirefoxDriver(FIREFOX.getDesiredCapabilities());
-                firefoxDriver.manage().timeouts().implicitlyWait(Long.parseLong(IMPLICITLY_WAIT_TIMEOUT), TimeUnit.SECONDS);
+                firefoxDriver.manage().timeouts().implicitlyWait(implicitlyWaitTimeout, TimeUnit.SECONDS);
                 return firefoxDriver;
 //            case HTML_UNIT_DRIVER:
 //                HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver();
@@ -69,7 +69,7 @@ public class WebDriverFactory {
                     throw new RuntimeException(e);
                 }
                 driver = new RemoteWebDriver(hubUrl, CHROME.getDesiredCapabilities());
-                driver.manage().timeouts().implicitlyWait(Long.parseLong(IMPLICITLY_WAIT_TIMEOUT), TimeUnit.SECONDS);
+                driver.manage().timeouts().implicitlyWait(implicitlyWaitTimeout, TimeUnit.SECONDS);
                 driver.manage().window().maximize();
                 return driver;
             default:

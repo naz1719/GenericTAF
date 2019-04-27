@@ -2,7 +2,7 @@ package execution;
 
 import definition.constants.CommonConsts;
 import execution.logger.TestLogger;
-import features.env.EnvInitializer;
+import features.properties.EnvInitializer;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -14,7 +14,7 @@ public class BaseTest {
     protected TestLogger LOG;
 
     @BeforeSuite(alwaysRun = true)
-    public void configureEnvProperties(ITestContext iTestContext) throws Exception {
+    public void loadProperties(ITestContext iTestContext) throws Exception {
         String country = iTestContext.getSuite().getParameter("country");
         System.setProperty(CommonConsts.ESCAPE_PROPERTY, "false");
         try {

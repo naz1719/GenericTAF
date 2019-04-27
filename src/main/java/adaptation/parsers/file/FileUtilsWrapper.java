@@ -1,7 +1,10 @@
 package adaptation.parsers.file;
 
+import io.restassured.internal.util.IOUtils;
+
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -16,27 +19,28 @@ import java.util.regex.Pattern;
 import static definition.constants.CommonConsts.FOLDER_PATH;
 
 public class FileUtilsWrapper {
-    public static void saveFileFromUrlWithCommonsIO(String url, String fileName) throws MalformedURLException, IOException {
+
+    public static String fileToString(String fileLocation) {
+        try {
+            return new String(IOUtils.toByteArray(ClassLoader.getSystemResourceAsStream(fileLocation)));
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    public static void saveFileFromUrl(String url, String fileName) throws MalformedURLException, IOException {
         org.apache.commons.io.FileUtils.copyURLToFile(new URL(url), new File(fileName));
     }
 
-    public static boolean isStream(String input) {
-        final Pattern pattern = Pattern.compile("([a-zA-Z0-9]+)-([a-zA-Z0-9]+)");
-        final Matcher matcher = pattern.matcher(input);
-        return matcher.matches();
-    }
-
-    public static boolean getExcelFilesList(String input) {
+    public static boolean excelMatcher(String input) {
         final Pattern pattern = Pattern.compile("(.*)(.(xlsx|xlx|xls))");
         final Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }
 
-    public static String getExcel() {
+    public static List<String> getExcelList() {
         final File folder = new File(FOLDER_PATH);
-        List<String> list = listFilesForFolder(folder);
-
-        return list.get(0);
+        return listFilesForFolder(folder);
     }
 
     public static List<String> listFilesForFolder(final File folder) {
@@ -45,7 +49,7 @@ public class FileUtilsWrapper {
             if (fileEntry.isDirectory()) {
                 listFilesForFolder(fileEntry);
             } else {
-                if (getExcelFilesList(fileEntry.getName())) {
+                if (excelMatcher(fileEntry.getName())) {
                     list.add(fileEntry.getName());
                 }
             }
@@ -62,41 +66,12 @@ public class FileUtilsWrapper {
         return input;
     }
 
-    public static void copyFileUsingApacheCommonsIO(String source, String dest) {
+    public static void copyFile(String source, String dest) {
         try {
             org.apache.commons.io.FileUtils.copyFileToDirectory(new File(source), new File(dest));
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static String filterUrl(String input) {
-        String string = null;
-
-        Pattern pattern = Pattern.compile("in/([a-zA-Z0-9]+)-([a-zA-Z0-9]+)");
-        Matcher matcher = pattern.matcher(input);
-        if (matcher.find()) {
-            string = matcher.group(1) + "-" + matcher.group(2);
-        } else {
-            Pattern pattern1 = Pattern.compile("in/([a-zA-Z0-9]+)");
-            Matcher matcher1 = pattern1.matcher(input);
-            if (matcher1.find()) {
-                string = matcher1.group(1);
-            }
-        }
-        return string;
-    }
-
-    public static String filterNameUrl(String input) {
-        String string = null;
-
-//        Pattern pattern = Pattern.compile("in/([a-zA-Z0-9]+)");
-        Pattern pattern = Pattern.compile("in/(.*)");
-        Matcher matcher = pattern.matcher(input);
-        if (matcher.find()) {
-            string = matcher.group(1);
-        }
-        return string;
     }
 
     public static void createHtmlFile(String string, final String path, String source) {
@@ -120,26 +95,4 @@ public class FileUtilsWrapper {
             }
         });
     }
-
-//      String str = a.replaceAll("[<|>|:|\"|/|\\\\|\\||?]|\\*", "_");
-//                createHtmlFile(str, "output/" + group + "/", sourceHtml);
-
-//    public void isMoreThanZero() {
-//        boolean var = true;
-//        int moreSize = pageBO.getMore().size();
-//        long endTime = System.currentTimeMillis();
-//        long duration = (endTime - startTime);
-//
-//        if (duration > 9000) {
-//            var = false;
-//        }
-//        if (moreSize > 0) {
-//            WebElement webElement = pageBO.getMore().get(0);
-//            WebDriverManager.executeScript("arguments[0].click();", webElement);
-//            if (var) {
-//                isMoreThanZero();
-//            }
-//        }
-//
-//    }
 }

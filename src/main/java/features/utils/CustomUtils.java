@@ -6,18 +6,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.jayway.restassured.response.Response;
-import org.apache.commons.lang3.text.StrSubstitutor;
-import org.testng.reporters.Files;
 
-import javax.xml.bind.JAXB;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -25,80 +18,11 @@ import java.util.function.Predicate;
 
 public class CustomUtils {
 
-    private static final String GENERAL_PROPERTIES_FILE_NAME = "general.properties";
-    private static final String CONFIG_PROPERTIES_FILE_NAME = "config.properties";
-    private static final String TEST_DATA_PATH = System.getProperty("testDataPath");
-
-
-    public static String getConfigPropFilePath() throws Exception {
-        File prpFile = null;
-        prpFile = new File(TEST_DATA_PATH + File.separator + CONFIG_PROPERTIES_FILE_NAME);
-        if (!prpFile.exists() || !prpFile.canRead()) {
-            throw new Exception("ERROR : The file :" + prpFile.getAbsolutePath() + " is missing");
-        }
-        return prpFile.getAbsolutePath();
-    }
-
-
     public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
         final Set<Object> seen = new HashSet<>();
         return t -> seen.add(keyExtractor.apply(t));
     }
 
-
-    public static String getSQLScriptByPatternName(String templateName) throws RuntimeException {
-        InputStream templatePath = null;
-        String fileNume = "db_scripts/" + templateName;
-        try {
-            templatePath = CustomUtils.class.getClassLoader().getResourceAsStream(fileNume);
-            return Files.readFile(templatePath);
-        } catch (Exception e) {
-            throw new RuntimeException("File [" + fileNume + "] is missing");
-        }
-
-    }
-
-    //For Report
-    public static String jaxbObjectToXML(Object customer) {
-        StringWriter sw = new StringWriter();
-        JAXB.marshal(customer, sw);
-        return sw.toString();
-    }
-
-    public static <T> String jaxbObjectListToXML(List<T> pojoList) {
-        StringWriter sw = new StringWriter();
-        for (T obj : pojoList) {
-            JAXB.marshal(obj, sw);
-        }
-
-        return sw.toString();
-    }
-
-
-    public static String prepareStatement(String templateName, Map<String, String> valuesMap) {
-        String templateString = CustomUtils.getSQLScriptByPatternName(templateName);
-        StrSubstitutor sub = new StrSubstitutor(valuesMap);
-        return sub.replace(templateString);
-    }
-
-    public static String prepareJson(String templateName, Map<String, String> valuesMap) {
-        String templateString = CustomUtils.getJSONFileByPatternName(templateName);
-        StrSubstitutor sub = new StrSubstitutor(valuesMap);
-        return sub.replace(templateString);
-    }
-
-
-    public static String getJSONFileByPatternName(String templateName) throws RuntimeException {
-        InputStream templatePath = null;
-        String fileNume = "json_templates/" + templateName;
-        try {
-            templatePath = CustomUtils.class.getClassLoader().getResourceAsStream(fileNume);
-            return Files.readFile(templatePath);
-        } catch (Exception e) {
-            throw new RuntimeException("File [" + fileNume + "] is missing");
-        }
-
-    }
 
     public static String getPrettyPrintJson(Response response) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -115,16 +39,7 @@ public class CustomUtils {
     }
 
 
-    public static String getGeneralPropFilePath() throws Exception {
-        File prpFile = null;
-        prpFile = new File(getDataStorDir() + File.separator + GENERAL_PROPERTIES_FILE_NAME);
-        if (!prpFile.exists() || !prpFile.canRead()) {
-            throw new Exception("ERROR : The file :" + prpFile.getAbsolutePath() + " is missing");
-        }
-        return prpFile.getAbsolutePath();
-    }
-
-    public static File getDataStorDir() {
+    public static File getCurrentUserDirectory() {
         File dd = new File(System.getProperty("user.dir"));
         if (!dd.exists()) {
             dd.mkdirs();
@@ -153,21 +68,5 @@ public class CustomUtils {
             throw new Exception("ERROR : Sorry the file :" + testDataFile.getAbsolutePath() + " is missing, you can download files from web if you define System Variable localTestData=false");
         }
     }
-
-    private static void printResultSet(ResultSet result) throws SQLException {
-        ResultSetMetaData rsmd = result.getMetaData();
-        int columnsNumber = rsmd.getColumnCount();
-        while (result.next()) {
-            for (int i = 1; i <= columnsNumber; i++) {
-                if (i > 1) System.out.print(",  ");
-                String columnValue = result.getString(i);
-                System.out.print(columnValue + " " + rsmd.getColumnName(i));
-            }
-            System.out.println("");
-        }
-    }
-
-
-
 }
 
