@@ -13,6 +13,7 @@ public class DateTimeTest extends BaseAPITest {
     public void checkCurrentDateTimeTest(ITestContext context) {
         String country = context.getSuite().getParameter(SuiteParam.country.name());
 
+        System.out.println("Supe Log");
         CurrentDateTimeResponse currentDateTimeResponse = GetTimeService.getInstance().getCurrentTime();
 //        AllureLogger.logInfo("Current time : [" + currentDateTimeResponse + "]");
     }
