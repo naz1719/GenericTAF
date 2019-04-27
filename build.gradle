@@ -71,7 +71,7 @@ allure {
 tasks.withType(Test) {
     useTestNG() {
         dependsOn cleanTest
-        suites 'src/test/suites/AllSuite.xml'
+        suites './src/test/suites/AllSuite.xml'
     }
     finalizedBy 'allureReport'
 }

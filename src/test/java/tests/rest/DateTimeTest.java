@@ -14,7 +14,7 @@ public class DateTimeTest extends BaseAPITest {
         String country = context.getSuite().getParameter(SuiteParam.country.name());
 
         System.out.println("Supe Log");
-        CurrentDateTimeResponse currentDateTimeResponse = GetTimeService.getInstance().getCurrentTime();
+//        CurrentDateTimeResponse currentDateTimeResponse = GetTimeService.getInstance().getCurrentTime();
 //        AllureLogger.logInfo("Current time : [" + currentDateTimeResponse + "]");
     }
 }
