@@ -68,7 +68,7 @@ allure {
     reportDir = file("$project.projectDir/allure-results")
 }
 
-tasks.withType(Test) {
+task runAllSuite(type:Test) {
     useTestNG() {
         dependsOn cleanTest
         suites './src/test/suites/AllSuite.xml'
