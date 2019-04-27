@@ -7,7 +7,7 @@ import com.jayway.restassured.internal.mapper.ObjectMapperType;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import definition.rest.BaseService;
-import definition.rest.dto.CurrentDateTimeResponse;
+import definition.rest.model.CurrentDateTimeResponse;
 import execution.logger.AllureLogger;
 import execution.logger.LogHolder;
 import features.properties.enums.EndpointPropNames;

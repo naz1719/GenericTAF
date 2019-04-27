@@ -20,6 +20,14 @@ import static definition.constants.CommonConsts.FOLDER_PATH;
 
 public class FileUtilsWrapper {
 
+    public static File getFile(String filePath) throws Exception {
+        File file = new File(filePath);
+        if (!file.exists() || !file.canRead()) {
+            throw new Exception("ERROR : Sorry the file :" + file.getAbsolutePath() + " is missing");
+        }
+        return file;
+    }
+
     public static String fileToString(String fileLocation) {
         try {
             return new String(IOUtils.toByteArray(ClassLoader.getSystemResourceAsStream(fileLocation)));

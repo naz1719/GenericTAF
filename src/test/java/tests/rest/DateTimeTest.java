@@ -1,6 +1,6 @@
 package tests.rest;
 
-import definition.rest.dto.CurrentDateTimeResponse;
+import definition.rest.model.CurrentDateTimeResponse;
 import definition.rest.service.GetTimeService;
 import execution.BaseAPITest;
 import execution.logger.AllureLogger;
