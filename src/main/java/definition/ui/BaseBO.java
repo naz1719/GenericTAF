@@ -1,8 +1,8 @@
 package definition.ui;
 
+import adaptation.ui.driver.WebDriverManager;
 import execution.logger.TestLogger;
 import features.wait.UIWaitManager;
-import adaptation.ui.driver.WebDriverManager;
 
 public abstract class BaseBO {
     protected UIWaitManager waitManager = UIWaitManager.getInstance();
@@ -14,7 +14,7 @@ public abstract class BaseBO {
     }
 
     public void openPortal(String url) {
-        step("Go to "+url);
+        step("Go to " + url);
         WebDriverManager.getUrl(url);
     }
 

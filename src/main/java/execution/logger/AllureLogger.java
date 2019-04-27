@@ -1,7 +1,6 @@
 package execution.logger;
 
 import adaptation.ui.driver.WebDriverManager;
-import features.utils.CustomUtils;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.openqa.selenium.OutputType;
@@ -55,8 +54,11 @@ public class AllureLogger {
         }
         return null;
     }
+
     @Step(value = "{log}")
-    public static void logInfo(String log) { }
+    public static void logInfo(String log) {
+    }
+
     private static void logToConsole(ByteArrayOutputStream stream) {
         if (logToslf4j) {
             logger.info("\n-------------\n" + stream.toString() + "\n");

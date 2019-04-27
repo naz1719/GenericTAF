@@ -1,6 +1,6 @@
 package execution;
 
-public abstract class BaseAPITest extends  BaseTest{
+public abstract class BaseAPITest extends BaseTest {
 
 }
 

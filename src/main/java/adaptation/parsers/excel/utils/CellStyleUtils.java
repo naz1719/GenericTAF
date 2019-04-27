@@ -20,6 +20,7 @@ public class CellStyleUtils {
         style.setBorderTop(BorderStyle.MEDIUM);
         return style;
     }
+
     public static CellStyle getStandardCellStyle(BaseExcel baseExcel) {
 
         CellStyle style = baseExcel.createCellStyle();
@@ -31,6 +32,7 @@ public class CellStyleUtils {
         style.setAlignment(HorizontalAlignment.LEFT);
         return style;
     }
+
     public static CellStyle getHyperLinkCellStyle(BaseExcel baseExcel) {
 
         CellStyle style = baseExcel.createCellStyle();

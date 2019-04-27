@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
 
 
 @Listeners(UITestListener.class)
-public abstract class BaseUITest extends BaseTest{
+public abstract class BaseUITest extends BaseTest {
     protected UIWaitManager waitManager = UIWaitManager.getInstance();
 
     @BeforeMethod
@@ -35,7 +35,6 @@ public abstract class BaseUITest extends BaseTest{
 //            e.printStackTrace();
 //        }
 //    }
-
 
 
     public void createInstance(Class<? extends BaseUITest> clazz) {

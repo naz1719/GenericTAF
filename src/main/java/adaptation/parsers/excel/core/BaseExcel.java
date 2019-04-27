@@ -1,8 +1,8 @@
 package adaptation.parsers.excel.core;
 
 import adaptation.parsers.excel.annotation.ExcelCell;
-import adaptation.parsers.excel.utils.ExcelFileUtils;
 import adaptation.parsers.excel.core.exception.ModelInstantiationException;
+import adaptation.parsers.excel.utils.ExcelFileUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
@@ -105,6 +105,7 @@ public class BaseExcel {
     public boolean isLastRevRow(int rownum, String sheetName) {
         return isRowRevEmpty(rownum, sheetName) && isRowRevEmpty(rownum + 1, sheetName) && isRowRevEmpty(rownum + 2, sheetName);
     }
+
     public boolean isRowRevEmpty(int rownum, String sheetName) {
         Row row = workbook.getSheet(sheetName).getRow(rownum);
         return ExcelFileUtils.isRowEmpty(row);
@@ -167,6 +168,7 @@ public class BaseExcel {
         }
         return instance;
     }
+
     public <T> List<T> unmarshal(Class<T> type, String sheetName, int skip) {
         Sheet sheet = workbook.getSheet(sheetName);
 
@@ -198,11 +200,13 @@ public class BaseExcel {
 
         return setFieldValue(currentRow, type, instance);
     }
+
     private <T> T setFieldValue(Row currentRow, Class<? super T> subclass, T instance) {
         return subclass == null
                 ? instance
                 : tailSetFieldValue(currentRow, subclass, setFieldValue(currentRow, subclass.getSuperclass(), instance));
     }
+
     private boolean skip(final Row currentRow, int skip) {
         return currentRow.getRowNum() + 1 <= skip;
     }

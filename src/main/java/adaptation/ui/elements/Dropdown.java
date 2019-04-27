@@ -19,9 +19,9 @@ public class Dropdown extends Element {
     }
 
     public void selectByVisibleText(String text) {
-      getOptions().stream().filter(i -> i.getText().contains(text))
+        getOptions().stream().filter(i -> i.getText().contains(text))
                 .findFirst().orElseThrow(() ->
-                        new NoSuchElementException("There is no node with configuration name - " + text)).click();
+                new NoSuchElementException("There is no node with configuration name - " + text)).click();
     }
 
     public void deselectByVisibleText(String index) {

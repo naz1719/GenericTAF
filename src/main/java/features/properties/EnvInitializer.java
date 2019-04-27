@@ -30,7 +30,7 @@ public class EnvInitializer {
 
 
     public static String getProperty(String key) {
-        return PropertyLoader.getProperty(key,PROPERTIES);
+        return PropertyLoader.getProperty(key, PROPERTIES);
     }
 
     //    private static void validateSmokeProperties() {

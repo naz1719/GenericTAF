@@ -49,7 +49,7 @@ public class WebDriverManager {
             }
 
             LOG.info("Browser has been stopped.");
-        }else {
+        } else {
             LOG.info("All browsers have been stopped.");
         }
     }

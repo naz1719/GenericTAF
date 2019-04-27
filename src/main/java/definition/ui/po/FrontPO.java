@@ -12,7 +12,7 @@ public class FrontPO extends BasePO {
 
 
     public void act_clickBuildingBlocks() {
-         buildingBlocks.click();
+        buildingBlocks.click();
     }
 
 }

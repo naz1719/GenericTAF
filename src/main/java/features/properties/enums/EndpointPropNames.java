@@ -16,6 +16,7 @@ public enum EndpointPropNames {
     public String getEndPoint() {
         return endPoint;
     }
+
     public String getValue() {
         return prop;
     }

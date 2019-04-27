@@ -10,15 +10,14 @@ import org.apache.poi.ss.usermodel.Sheet;
 import java.util.Arrays;
 import java.util.List;
 
-import static definition.constants.CommonConsts.*;
+import static definition.constants.CommonConsts.FILE_PATH;
+import static definition.constants.CommonConsts.SHEET1;
 
 public class SampleBhv extends BaseBhv {
+    public static List<String> SAMPLE_HEADERS = Arrays.asList("Header", "Header", "Header", "Header");
     private BaseExcel baseExcel = new BaseExcel(FILE_PATH).openFile();
     private Sheet sheet = baseExcel.getSheet(SHEET1);
-
     private CellStyle headerStyle = CellStyleUtils.getCellSHeaderStyle(baseExcel);
-
-    public static List<String> SAMPLE_HEADERS = Arrays.asList("Header", "Header", "Header", "Header");
     private int BEGIN_ROW_CREATED_SHEET = 1;
 
 

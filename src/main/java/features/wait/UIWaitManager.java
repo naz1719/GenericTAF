@@ -16,22 +16,22 @@ import static adaptation.ui.driver.WebDriverManager.getDriver;
 
 
 public class UIWaitManager {
-    private static final UIWaitManager instance = new UIWaitManager();
-
     public static final int DEFAULT_TIME_OUT = 60;// Seconds
+    private static final UIWaitManager instance = new UIWaitManager();
     private static final long DEFAULT_POLLING = 1L;
     private static final TimeUnit DEFAULT_TIME_UNIT = TimeUnit.SECONDS;
     private static final String ELEMENT_NOT_CLICKABLE = "Element wasn't clickable in %s sec";
     private static final String ERROR_WAITING = "Some problem occurs during waiting";
     private static final int COUNT_RETRY = 5;
     private static final int DURATION = 3;
-        private static final Logger LOG = Logger.getLogger(UIWaitManager.class);
+    private static final Logger LOG = Logger.getLogger(UIWaitManager.class);
     private static final int COUNT_RETRY_INCYCLE = 50;
     private static final int RETRY_CYCLE_SLEEP = 500;
     private long timeOut;
     private TimeUnit timeUnitForTimeOut;
     private long polling;
     private TimeUnit timeUnitForPolling;
+
     public UIWaitManager(int timeOut, TimeUnit unit) {
         this.timeOut = timeOut;
         this.timeUnitForTimeOut = unit;

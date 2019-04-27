@@ -1,4 +1,4 @@
-package features.number;
+package features.utils;
 
 import java.math.BigDecimal;
 

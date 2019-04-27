@@ -1,9 +1,9 @@
 package tests.ui;
 
 import adaptation.ui.driver.WebDriverManager;
-import execution.injector.Injector;
 import definition.ui.bo.FrontBO;
 import execution.BaseUITest;
+import execution.injector.Injector;
 import features.SuiteParam;
 import features.wait.DelaySteps;
 import org.openqa.selenium.By;
@@ -25,7 +25,7 @@ public class LoginCheckTest extends BaseUITest {
         frontBO.openPortal(WEB_SITE_URL);
         WebElement webElement = WebDriverManager.getDriver().findElement(By.name("q"));
         waitManager.fluentElementWait(webElement);
-        webElement.sendKeys("Hey " +country);
+        webElement.sendKeys("Hey " + country);
         webElement.submit();
 
         DelaySteps.getInstance().delayStep(4);

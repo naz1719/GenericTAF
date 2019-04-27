@@ -7,11 +7,13 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.jayway.restassured.response.Response;
 
-import java.io.*;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.util.*;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.Base64;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -62,11 +64,12 @@ public class CustomUtils {
 
     }
 
-    public static void checkTestData(String excelPath) throws Exception {
-        File testDataFile = new File(excelPath);
-        if (!testDataFile.exists() || !testDataFile.canRead()) {
-            throw new Exception("ERROR : Sorry the file :" + testDataFile.getAbsolutePath() + " is missing, you can download files from web if you define System Variable localTestData=false");
+    public static File getFile(String filePath) throws Exception {
+        File file = new File(filePath);
+        if (!file.exists() || !file.canRead()) {
+            throw new Exception("ERROR : Sorry the file :" + file.getAbsolutePath() + " is missing");
         }
+        return file;
     }
 }
 

@@ -29,7 +29,7 @@ public class BaseBehaviour {
     }
 
     public boolean isLastRevRow(int rownum) {
-        return isRowRevEmpty(rownum) && isRowRevEmpty(rownum+1) && isRowRevEmpty(rownum+2) &&
-                isRowRevEmpty(rownum+3) && isRowRevEmpty(rownum+4) && isRowRevEmpty(rownum+5);
+        return isRowRevEmpty(rownum) && isRowRevEmpty(rownum + 1) && isRowRevEmpty(rownum + 2) &&
+                isRowRevEmpty(rownum + 3) && isRowRevEmpty(rownum + 4) && isRowRevEmpty(rownum + 5);
     }
 }

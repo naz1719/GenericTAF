@@ -38,11 +38,6 @@ public enum Drivers {
         throw new RuntimeException("Driver " + driverValue + " doesn't support, review name of driver");
     }
 
-
-    public DesiredCapabilities getDesiredCapabilities() {
-        return desiredCapabilities;
-    }
-
     private static DesiredCapabilities getChromeCapabilities() {
         DesiredCapabilities chromeCapabilities = DesiredCapabilities.chrome();
         chromeCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
@@ -70,6 +65,10 @@ public enum Drivers {
         internetExplorerCapabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
         internetExplorerCapabilities.setCapability("ignoreProtectedModeSettings", true);
         return internetExplorerCapabilities;
+    }
+
+    public DesiredCapabilities getDesiredCapabilities() {
+        return desiredCapabilities;
     }
 
     public String getProperty() {

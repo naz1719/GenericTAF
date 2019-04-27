@@ -16,7 +16,7 @@ public class ExcelModelTitleProcessor {
 
         uniqueTitles.forEach(title -> {
             List<ProductEx> pvList = getAllExcelRowPvForProductID(products, title);
-            ProductList pvModel = transformToPvModel(pvList,title);
+            ProductList pvModel = transformToPvModel(pvList, title);
 
             pvModelsList.add(pvModel);
         });
@@ -47,7 +47,7 @@ public class ExcelModelTitleProcessor {
     }
 
 
-    private static ProductList transformToPvModel(List<ProductEx> excelRowPVs,String title) {
+    private static ProductList transformToPvModel(List<ProductEx> excelRowPVs, String title) {
         ProductList pv = new ProductList();
         pv.setProducts(excelRowPVs);
         pv.setProductTitle(title);

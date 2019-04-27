@@ -24,9 +24,9 @@ public class RunHubAndNodes {
 
     private static void runHubAndNodes() throws IOException {
         if (isWindows()) {
-            Runtime.getRuntime().exec("cmd /c start runHub.bat",null,  getAbsolutePath(COMMON_PATH + "/windows"));
-            Runtime.getRuntime().exec("cmd /c start runNode1.bat",null ,getAbsolutePath(COMMON_PATH + "/windows"));
-            Runtime.getRuntime().exec("cmd /c start runNode2.bat",null , getAbsolutePath(COMMON_PATH + "/windows"));
+            Runtime.getRuntime().exec("cmd /c start runHub.bat", null, getAbsolutePath(COMMON_PATH + "/windows"));
+            Runtime.getRuntime().exec("cmd /c start runNode1.bat", null, getAbsolutePath(COMMON_PATH + "/windows"));
+            Runtime.getRuntime().exec("cmd /c start runNode2.bat", null, getAbsolutePath(COMMON_PATH + "/windows"));
         } else if (isUnix()) {
             Runtime.getRuntime().exec(getAbsolutePath(COMMON_PATH + "/unix/runHub.sh").getAbsolutePath());
             Runtime.getRuntime().exec(getAbsolutePath(COMMON_PATH + "/unix/runNode1.sh").getAbsolutePath());
@@ -37,7 +37,7 @@ public class RunHubAndNodes {
     private static void stopHubAndNodes() {
         if (isWindows()) {
             try {
-                Runtime.getRuntime().exec("cmd /c start stopAllServersAndNodes.bat",null,  getAbsolutePath(COMMON_PATH));
+                Runtime.getRuntime().exec("cmd /c start stopAllServersAndNodes.bat", null, getAbsolutePath(COMMON_PATH));
             } catch (IOException e) {
                 e.printStackTrace();
             }

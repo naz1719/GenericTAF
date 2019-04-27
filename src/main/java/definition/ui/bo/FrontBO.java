@@ -10,7 +10,7 @@ public class FrontBO extends BaseBO {
         frontPO = new FrontPO();
     }
 
-    public FrontBO clickOnBuildingBlocks(){
+    public FrontBO clickOnBuildingBlocks() {
         step("Click on 'Publication 200 Building Blocks'");
         frontPO.act_clickBuildingBlocks();
         return this;
