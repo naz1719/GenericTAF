@@ -4,7 +4,7 @@ import features.properties.EnvInitializer;
 import features.properties.enums.GeneralPropNames;
 import features.retry.RetryCommandJava8;
 import io.qameta.allure.Step;
-import org.openqa.selenium.Platform;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -30,7 +30,7 @@ public class WebDriverFactory {
         Drivers driverType = Drivers.getDriverType(browser);
         String hubURLSystemProperty = EnvInitializer.getProperty(GeneralPropNames.HUB_URL.getValue());
 
-        if (!hubURLSystemProperty.equalsIgnoreCase("_hubURL_") && !hubURLSystemProperty.isEmpty()) {
+        if (!hubURLSystemProperty.equalsIgnoreCase("_hubURL_") && StringUtils.isNotBlank(hubURLSystemProperty)) {
             driverType = Drivers.REMOTE_WEB_DRIVER;
         }
 
@@ -75,9 +75,8 @@ public class WebDriverFactory {
                 } catch (MalformedURLException e) {
                     throw new RuntimeException(e);
                 }
-                DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
-                desiredCapabilities.setPlatform(Platform.WIN10);
-                driver = new RemoteWebDriver(hubUrl, desiredCapabilities);
+                DesiredCapabilities chrome1 = DesiredCapabilities.chrome();
+                driver = new RemoteWebDriver(hubUrl, chrome1);
 
                 driver.manage().timeouts().implicitlyWait(implicitlyWaitTimeout, TimeUnit.SECONDS);
                 driver.manage().window().maximize();

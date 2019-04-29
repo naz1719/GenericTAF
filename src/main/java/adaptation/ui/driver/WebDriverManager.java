@@ -21,7 +21,7 @@ public class WebDriverManager {
     }
 
     public static WebDriver getDriver() {
-        return pool.get() != null ? pool.get() : createAndGetDriver();
+         return pool.get() != null ? pool.get() : createAndGetDriver();
     }
 
     private static WebDriver createAndGetDriver() {
