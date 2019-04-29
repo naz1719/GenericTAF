@@ -1,10 +1,8 @@
 package definition.constants;
 
-import features.utils.CustomUtils;
-
 public final class CommonConsts {
     public static final String ESCAPE_PROPERTY = "org.uncommons.reportng.escape-output";
-    public static final String COMMON_DRIVER_PATH = CustomUtils.getCurrentUserDirectory() + "\\testData\\web-drivers\\";
+    public static final String COMMON_DRIVER_PATH = "./testData/web-drivers/";
 
     //    URL constants
     public static final String WEB_SITE_URL = "https://www.google.com.ua/";
