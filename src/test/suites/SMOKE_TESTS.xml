@@ -8,7 +8,7 @@
     <test name="Google Search Test">
         <classes>
             <class name="tests.ui.LoginCheckTest"/>
-            <class name="tests.rest.DateTimeTest"/>
+            <!--<class name="tests.rest.DateTimeTest"/>-->
         </classes>
     </test>
 </suite>

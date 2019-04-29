@@ -15,11 +15,10 @@ import static definition.constants.CommonConsts.WEB_SITE_URL;
 
 public class LoginCheckTest extends BaseUITest {
 
-    @Injector
-    private FrontBO frontBO;
-
     @Test
     public void testGoogleSearch(ITestContext context) throws InterruptedException {
+        FrontBO frontBO = new FrontBO();
+
         String country = context.getSuite().getParameter(SuiteParam.country.name());
 
         frontBO.openPortal(WEB_SITE_URL);

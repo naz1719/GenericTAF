@@ -39,6 +39,14 @@ public class CustomUtils {
         return dd;
     }
 
+    public static String getGeneralPropFilePath(String filePath) throws Exception {
+        File prpFile = null;
+        prpFile = new File(getCurrentUserDirectory() + File.separator + filePath);
+        if (!prpFile.exists() || !prpFile.canRead()) {
+            throw new Exception("ERROR : The file :" + prpFile.getAbsolutePath() + " is missing");
+        }
+        return prpFile.getAbsolutePath();
+    }
 
     public static ByteArrayOutputStream getByteArray(String data) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

@@ -12,7 +12,7 @@ public enum Drivers {
     CHROME("webdriver.chrome.driver", "chrome", CommonConsts.COMMON_DRIVER_PATH + "chromedriver.exe", getChromeCapabilities()),
     IE("webdriver.ie.driver", "internet explorer", CommonConsts.COMMON_DRIVER_PATH + "IEDriverServer32.exe", getInternetExplorerCapabilities()),
     FIREFOX("webdriver.gecko.driver", "firefox", CommonConsts.COMMON_DRIVER_PATH + "geckodriver.exe", null),
-    REMOTE_WEB_DRIVER(null, "remote web driver", "http://localhost:5555/wd/hub", getChromeCapabilities()),
+    REMOTE_WEB_DRIVER(),
     HTML_UNIT_DRIVER(null, "html unit driver", null, null),
     GHOST_DRIVER("phantomjs.binary.path", "ghost driver", CommonConsts.COMMON_DRIVER_PATH + "phantomjs.exe", null);
 
@@ -21,6 +21,8 @@ public enum Drivers {
     private String driverPath;
     private DesiredCapabilities desiredCapabilities;
 
+    Drivers() {
+    }
 
     Drivers(String property, String driverValue, String driverPath, DesiredCapabilities desiredCapabilities) {
         this.property = property;

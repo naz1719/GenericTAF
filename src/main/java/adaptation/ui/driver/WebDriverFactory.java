@@ -2,11 +2,16 @@ package adaptation.ui.driver;
 
 import features.properties.EnvInitializer;
 import features.properties.enums.GeneralPropNames;
+import features.retry.RetryCommandJava8;
+import io.qameta.allure.Step;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.Assert;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -61,14 +66,19 @@ public class WebDriverFactory {
 //                WebDriver ghostDriver = new PhantomJSDriver();
 //                return ghostDriver;
             case REMOTE_WEB_DRIVER:
+                System.setProperty(CHROME.getProperty(), CHROME.getDriverPath());
+                checkDriverPathSetToEnvVariable();
                 WebDriver driver;
                 URL hubUrl;
                 try {
-                    hubUrl = new URL(Drivers.REMOTE_WEB_DRIVER.getDriverPath());
+                    hubUrl = new URL(EnvInitializer.getProperty(GeneralPropNames.HUB_URL.getValue()));
                 } catch (MalformedURLException e) {
                     throw new RuntimeException(e);
                 }
-                driver = new RemoteWebDriver(hubUrl, CHROME.getDesiredCapabilities());
+                DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
+                desiredCapabilities.setPlatform(Platform.WIN10);
+                driver = new RemoteWebDriver(hubUrl, desiredCapabilities);
+
                 driver.manage().timeouts().implicitlyWait(implicitlyWaitTimeout, TimeUnit.SECONDS);
                 driver.manage().window().maximize();
                 return driver;
@@ -78,4 +88,21 @@ public class WebDriverFactory {
     }
 
 
+    @Step("Verify driver path was set")
+    public void checkDriverPathSetToEnvVariable() {
+        int maxRetries = 5;
+        int delayBetweenRetryInSec = 5;
+        try {
+            new RetryCommandJava8<>(maxRetries, delayBetweenRetryInSec).run(() -> {
+                try {
+                    Assert.assertEquals(System.getProperty(CHROME.getProperty()), CHROME.getDriverPath(), "ChromeDriver path wasn't set as env variable");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                return null;
+            });
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
