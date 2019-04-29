@@ -32,6 +32,7 @@ public class WebDriverFactory {
 
         if (!hubURLSystemProperty.equalsIgnoreCase("_hubURL_") && StringUtils.isNotBlank(hubURLSystemProperty)) {
             driverType = Drivers.REMOTE_WEB_DRIVER;
+            System.out.println("HUB_URL: " + hubURLSystemProperty);
         }
 
         return getDriverInstance(driverType);
