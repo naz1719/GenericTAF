@@ -47,6 +47,7 @@ public class RunHubAndNodes {
     public static void main(String[] args) {
         try {
             runHubAndNodes();
+//            stopHubAndNodes();
         } catch (IOException e) {
             e.printStackTrace();
         }

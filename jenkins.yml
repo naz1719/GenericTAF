@@ -1,0 +1,18 @@
+# To execute this docker-compose yml file use `docker-compose -f <file_name> up`
+# Add the `-d` flag at the end for detached execution
+version: "3"
+services:
+  jenkins:
+     image: 'jenkins/jenkins:lts'
+     labels:
+       kompose.service.type: nodeport
+     networks: ['stack']
+     ports:
+       - '8080:8080'
+     volumes:
+        - 'D:\jenkins_home\users:var/jenkins_home/users:rw'
+#        - './jenkins_home/config.xml:var/jenkins_home:rw'
+volumes:
+  jenkins_home:
+    driver: local
+networks: {stack: {}}
