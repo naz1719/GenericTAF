@@ -28,16 +28,17 @@ services:
       - HUB_HOST=selenium-hub
       - HUB_PORT=4444
     networks: ['stack']
-  jenkins:
-     image: 'jenkins/jenkins:lts'
-     labels:
-       kompose.service.type: nodeport
-     networks: ['stack']
-     ports:
-       - '8080:8080'
-     volumes:
-       - 'jenkins_data:/jenkins_config:rw'
-volumes:
-  jenkins_data:
-    driver: local
+  jenkins_execution:
+    build:
+      context: .
+      dockerfile: Dockerfile.dockerFile
+    labels:
+      kompose.service.type: nodeport
+    networks: ['stack']
+    ports:
+     - '8080:8080'
+    volumes:
+         - jenkins_home:/var/jenkins_home
 networks: {stack: {}}
+volumes:
+  jenkins_home:
