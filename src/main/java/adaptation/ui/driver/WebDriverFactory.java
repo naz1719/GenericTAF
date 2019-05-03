@@ -24,11 +24,12 @@ public class WebDriverFactory {
 
     protected String browser = EnvInitializer.getProperty(GeneralPropNames.BROWSER.getValue());
     protected Long implicitlyWaitTimeout = Long.parseLong(EnvInitializer.getProperty(GeneralPropNames.IMPLICITLY_WAIT_TIMEOUT.getValue()));
+    private String hubURLSystemProperty;
 
 
     public WebDriver getDriverInstance() {
         Drivers driverType = Drivers.getDriverType(browser);
-        String hubURLSystemProperty = EnvInitializer.getProperty(GeneralPropNames.HUB_URL.getValue());
+        hubURLSystemProperty = EnvInitializer.getProperty(GeneralPropNames.HUB_URL.getValue());
 
         if (!hubURLSystemProperty.equalsIgnoreCase("_hubURL_") && StringUtils.isNotBlank(hubURLSystemProperty)) {
             driverType = Drivers.REMOTE_WEB_DRIVER;
@@ -72,7 +73,7 @@ public class WebDriverFactory {
                 WebDriver driver;
                 URL hubUrl;
                 try {
-                    hubUrl = new URL(EnvInitializer.getProperty(GeneralPropNames.HUB_URL.getValue()));
+                    hubUrl = new URL(hubURLSystemProperty);
                 } catch (MalformedURLException e) {
                     throw new RuntimeException(e);
                 }
