@@ -16,7 +16,7 @@ LABEL description="Configured image based on Jenksin, JDK8 image and configured 
 # install git
 RUN apt-get update
 RUN apt-get install git
-ENV GIT_HOME=/use/bing/git
+ENV GIT_HOME=/usr/bin/git
 
 # install gradle
 RUN apt -y install gradle

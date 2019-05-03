@@ -1,6 +1,9 @@
 package adaptation.ui.driver;
 
 import definition.constants.CommonConsts;
+import features.properties.EnvInitializer;
+import features.properties.enums.GeneralPropNames;
+import features.properties.enums.OperationSystems;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -9,12 +12,12 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public enum Drivers {
 
-    CHROME("webdriver.chrome.driver", "chrome", CommonConsts.COMMON_DRIVER_PATH + "chromedriver.exe", getChromeCapabilities()),
-    IE("webdriver.ie.driver", "internet explorer", CommonConsts.COMMON_DRIVER_PATH + "IEDriverServer32.exe", getInternetExplorerCapabilities()),
-    FIREFOX("webdriver.gecko.driver", "firefox", CommonConsts.COMMON_DRIVER_PATH + "geckodriver.exe", null),
+    CHROME("webdriver.chrome.driver", "chrome", "chromedriver", getChromeCapabilities()),
+    IE("webdriver.ie.driver", "internet explorer", "IEDriverServer32", getInternetExplorerCapabilities()),
+    FIREFOX("webdriver.gecko.driver", "firefox", "geckodriver", null),
     REMOTE_WEB_DRIVER(),
     HTML_UNIT_DRIVER(null, "html unit driver", null, null),
-    GHOST_DRIVER("phantomjs.binary.path", "ghost driver", CommonConsts.COMMON_DRIVER_PATH + "phantomjs.exe", null);
+    GHOST_DRIVER("phantomjs.binary.path", "ghost driver", "phantomjs", null);
 
     private String property;
     private String driverValue;
@@ -78,7 +81,16 @@ public enum Drivers {
     }
 
     public String getDriverPath() {
-        return driverPath;
+        String os =  EnvInitializer.getProperty(GeneralPropNames.OPERATION_SYSTEM.getValue());
+        String absoluteDriverPath = null;
+        if (os.equalsIgnoreCase(OperationSystems.WINDOWS.getOperationSystem())) {
+            absoluteDriverPath = CommonConsts.COMMON_DRIVER_PATH+"windows/"+ driverPath + ".exe";
+        } else if (os.equalsIgnoreCase(OperationSystems.LINUX.getOperationSystem())) {
+            absoluteDriverPath = CommonConsts.COMMON_DRIVER_PATH+"linux/"+ driverPath;
+        } else {
+            throw new RuntimeException("The framework doesn't support os: [" + os+"]");
+        }
+        return absoluteDriverPath;
     }
 
     public String getDriverValue() {
