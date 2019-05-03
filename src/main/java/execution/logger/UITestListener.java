@@ -31,6 +31,7 @@ public class UITestListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult iTestResult) {
         LOG.info("[FAILED]");
+        LOG.info(iTestResult.getThrowable().fillInStackTrace());
         AllureLogger.captureScreenshot();
         File file = new File(String.format(LOG_OUTPUT_PATH, System.getProperty("user.dir"), className, testName));
         AllureLogger.attachLog(file);

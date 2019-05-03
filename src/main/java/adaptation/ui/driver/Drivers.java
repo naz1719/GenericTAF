@@ -14,7 +14,7 @@ public enum Drivers {
 
     CHROME("webdriver.chrome.driver", "chrome", "chromedriver", getChromeCapabilities()),
     IE("webdriver.ie.driver", "internet explorer", "IEDriverServer32", getInternetExplorerCapabilities()),
-    FIREFOX("webdriver.gecko.driver", "firefox", "geckodriver", null),
+    FIREFOX("webdriver.gecko.driver", "firefox", "geckodriver", getFirefoxCapabilities()),
     REMOTE_WEB_DRIVER(),
     HTML_UNIT_DRIVER(null, "html unit driver", null, null),
     GHOST_DRIVER("phantomjs.binary.path", "ghost driver", "phantomjs", null);
