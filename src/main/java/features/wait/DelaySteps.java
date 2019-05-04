@@ -17,15 +17,23 @@ public class DelaySteps {
     }
 
     @Step(value = "DelayStep: {seconds} seconds")
-    public void delayStep(int seconds) throws InterruptedException {
+    public void delayStep(int seconds) {
         LOG.info("[Start] DelayStep:" + seconds + " seconds");
-        Thread.sleep(seconds * 1000);
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Step(value = "DelayStep: {delayDescription} : {seconds} seconds")
-    public void delayStep(int seconds, String delayDescription) throws InterruptedException {
+    public void delayStep(int seconds, String delayDescription) {
         LOG.info("[Start] DelayStep:" + delayDescription + ": " + seconds + " seconds");
-        Thread.sleep(seconds * 1000);
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

@@ -3,8 +3,10 @@ package adaptation.ui.driver;
 import features.properties.EnvInitializer;
 import features.properties.enums.GeneralPropNames;
 import features.retry.RetryCommandJava8;
+import features.utils.CustomUtils;
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -13,7 +15,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
@@ -35,7 +36,6 @@ public class WebDriverFactory {
             driverType = Drivers.REMOTE_WEB_DRIVER;
             System.out.println("HUB_URL: " + hubURLSystemProperty);
         }
-
         return getDriverInstance(driverType);
     }
 
@@ -44,7 +44,7 @@ public class WebDriverFactory {
         switch (driverType) {
             case CHROME:
                 System.setProperty(CHROME.getProperty(), CHROME.getDriverPath());
-                WebDriver chrome = new ChromeDriver(CHROME.getDesiredCapabilities());
+                WebDriver chrome = new ChromeDriver();
                 chrome.manage().timeouts().implicitlyWait(implicitlyWaitTimeout, TimeUnit.SECONDS);
                 return chrome;
             case IE:
@@ -68,17 +68,14 @@ public class WebDriverFactory {
 //                WebDriver ghostDriver = new PhantomJSDriver();
 //                return ghostDriver;
             case REMOTE_WEB_DRIVER:
-                System.setProperty(CHROME.getProperty(), CHROME.getDriverPath());
-                checkDriverPathSetToEnvVariable();
                 WebDriver driver;
-                URL hubUrl;
-                try {
-                    hubUrl = new URL(hubURLSystemProperty);
-                } catch (MalformedURLException e) {
-                    throw new RuntimeException(e);
-                }
-                DesiredCapabilities chrome1 = DesiredCapabilities.chrome();
-                driver = new RemoteWebDriver(hubUrl, chrome1);
+                URL hubUrl = CustomUtils.convertStringToURL(hubURLSystemProperty);
+
+                DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
+                desiredCapabilities.setBrowserName("chrome");
+                desiredCapabilities.setPlatform(Platform.WIN10);
+
+                driver = new RemoteWebDriver(hubUrl, desiredCapabilities);
 
                 driver.manage().timeouts().implicitlyWait(implicitlyWaitTimeout, TimeUnit.SECONDS);
                 driver.manage().window().maximize();

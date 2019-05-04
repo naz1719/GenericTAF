@@ -20,10 +20,10 @@ import static definition.constants.CommonConsts.FOLDER_PATH;
 
 public class FileUtilsWrapper {
 
-    public static File getFile(String filePath) throws Exception {
+    public static File getFile(String filePath) {
         File file = new File(filePath);
         if (!file.exists() || !file.canRead()) {
-            throw new Exception("ERROR : Sorry the file :" + file.getAbsolutePath() + " is missing");
+            throw new RuntimeException("ERROR : Sorry the file :" + file.getAbsolutePath() + " is missing");
         }
         return file;
     }

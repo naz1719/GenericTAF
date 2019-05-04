@@ -11,6 +11,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Function;
@@ -60,6 +62,16 @@ public class CustomUtils {
         }
         return byteArrayOutputStream;
 
+    }
+
+    public static URL convertStringToURL(String link) {
+        URL url;
+        try {
+            url = new URL(link);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+        return url;
     }
 
 }
