@@ -1,9 +1,7 @@
 package adaptation.ui.driver;
 
 import definition.constants.CommonConsts;
-import features.properties.EnvInitializer;
-import features.properties.enums.GeneralPropNames;
-import features.properties.enums.OperationSystems;
+import org.apache.commons.lang3.SystemUtils;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -82,7 +80,7 @@ public enum Drivers {
 
     public String getDriverPath() {
         String absoluteDriverPath;
-        if (System.getProperty("os.name").startsWith("Windows")) {
+        if (SystemUtils.IS_OS_WINDOWS) {
             absoluteDriverPath = CommonConsts.COMMON_DRIVER_PATH + "windows/" + driverPath + ".exe";
         } else {
             absoluteDriverPath = CommonConsts.COMMON_DRIVER_PATH + "linux/" + driverPath;
