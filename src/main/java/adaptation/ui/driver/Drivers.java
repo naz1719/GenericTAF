@@ -81,14 +81,11 @@ public enum Drivers {
     }
 
     public String getDriverPath() {
-        String os =  EnvInitializer.getProperty(GeneralPropNames.OPERATION_SYSTEM.getValue());
-        String absoluteDriverPath = null;
-        if (os.equalsIgnoreCase(OperationSystems.WINDOWS.getOperationSystem())) {
-            absoluteDriverPath = CommonConsts.COMMON_DRIVER_PATH+"windows/"+ driverPath + ".exe";
-        } else if (os.equalsIgnoreCase(OperationSystems.LINUX.getOperationSystem())) {
-            absoluteDriverPath = CommonConsts.COMMON_DRIVER_PATH+"linux/"+ driverPath;
+        String absoluteDriverPath;
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            absoluteDriverPath = CommonConsts.COMMON_DRIVER_PATH + "windows/" + driverPath + ".exe";
         } else {
-            throw new RuntimeException("The framework doesn't support os: [" + os+"]");
+            absoluteDriverPath = CommonConsts.COMMON_DRIVER_PATH + "linux/" + driverPath;
         }
         return absoluteDriverPath;
     }
