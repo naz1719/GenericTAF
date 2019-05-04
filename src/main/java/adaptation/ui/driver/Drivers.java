@@ -82,8 +82,10 @@ public enum Drivers {
         String absoluteDriverPath;
         if (SystemUtils.IS_OS_WINDOWS) {
             absoluteDriverPath = CommonConsts.COMMON_DRIVER_PATH + "windows/" + driverPath + ".exe";
-        } else {
+        } else if(SystemUtils.IS_OS_UNIX) {
             absoluteDriverPath = CommonConsts.COMMON_DRIVER_PATH + "linux/" + driverPath;
+        }else {
+            throw new RuntimeException("The framework doesn't support os: [" + System.getProperty("os.name")+"]");
         }
         return absoluteDriverPath;
     }
