@@ -71,11 +71,7 @@ public class WebDriverFactory {
                 WebDriver driver;
                 URL hubUrl = CustomUtils.convertStringToURL(hubURLSystemProperty);
 
-                DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
-                desiredCapabilities.setBrowserName("chrome");
-                desiredCapabilities.setPlatform(Platform.WIN10);
-
-                driver = new RemoteWebDriver(hubUrl, desiredCapabilities);
+                driver = new RemoteWebDriver(hubUrl, DesiredCapabilities.chrome());
 
                 driver.manage().timeouts().implicitlyWait(implicitlyWaitTimeout, TimeUnit.SECONDS);
                 driver.manage().window().maximize();
