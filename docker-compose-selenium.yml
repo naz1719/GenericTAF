@@ -16,6 +16,8 @@ services:
       - selenium-hub
     ports:
           - "5555:5555"
+#          - "5556:5900"
+# pwd to VNC Server : secret
     environment:
       - HUB_HOST=selenium-hub
       - HUB_PORT=4444
