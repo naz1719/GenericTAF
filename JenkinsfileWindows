@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
+                step([$class: 'WsCleanup'])
                 git (credentialsId: 'e0e22cc9-0ac6-4335-8b30-68b46091de2a',
                         url: 'https://github.com/naz1719/GenericTAF.git',
                         branch : 'master'
@@ -16,10 +17,10 @@ pipeline {
                         configs: [
                                 fileContentReplaceConfig(
                                         configs: [
-                                                // fileContentReplaceItemConfig(
-                                                //     search: '(_hubURL_)',
-                                                //     replace: 'http://localhost:4444/wd/hub',
-                                                //     matchCount: 1),
+                                                fileContentReplaceItemConfig(
+                                                        search: '(_hubURL_)',
+                                                        replace: 'http://localhost:4444/wd/hub',
+                                                        matchCount: 1),
                                         ],
                                         fileEncoding: 'UTF-8',
                                         filePath: './src/main/resources/general.properties')
@@ -28,8 +29,7 @@ pipeline {
         }
         stage('Run tests') {
             steps {
-                sh label: 'Add permission to execute', script: 'chmod +x ./gradlew'
-                sh label: 'Run all suites', script: './gradlew clean runAllSuite --info'
+                bat './gradlew clean runAllSuite --info'
             }
         }
     }
@@ -38,6 +38,9 @@ pipeline {
         always {
             archiveArtifacts artifacts: '**'
             allure results: [[path: 'build/allure-results']]
+        }
+        success {
+            echo 'I succeeeded!'
         }
     }
 }
