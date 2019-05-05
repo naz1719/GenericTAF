@@ -19,6 +19,8 @@ services:
 #          - "5556:5900"
 # pwd to VNC Server : secret
     environment:
+      - NODE_MAX_INSTANCES=2
+      - NODE_MAX_SESSION=2
       - HUB_HOST=selenium-hub
       - HUB_PORT=4444
     networks: ['backend']
